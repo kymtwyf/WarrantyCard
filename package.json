@@ -1,0 +1,22 @@
+{
+  "name": "WarrantyCard",
+  "version": "0.0.1",
+  "description": "The final project for Bachelor",
+  "main": "app.js",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "jade",
+    "stylus"
+  ],
+  "author": "Wu Yongfeng (Kevian)",
+  "license": "none"
+}
