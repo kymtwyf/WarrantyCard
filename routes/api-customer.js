@@ -21,22 +21,22 @@ function validateRegister(req) {
   return true;
 }
 exports.register = function(req, res){
-	console.log(util.inspect(req.body));
-	// res.send(404);
-	if(validateRegister(req)){
-		var customer = new Customer({
-			name:req.body.name,
-			password:req.body.password,
-			email:req.body.email,
-			address:req.body.address,
-			telephone:req.body.telephone,
-		});
-		customer.save(function(err,product){
-			if(!err){
-				res.send(JSON.stringify(product));
-			}else{
-				res.send(JSON.stringify(err))
-			}
-		});
-	}
+  console.log(util.inspect(req.body));
+  // res.send(404);
+  if(validateRegister(req)){
+    var customer = new Customer({
+      name:req.body.name,
+      password:req.body.password,
+      email:req.body.email,
+      address:req.body.address,
+      telephone:req.body.telephone,
+    });
+    customer.save(function(err,product){
+      if(!err){
+        res.send(JSON.stringify(product));
+      }else{
+        res.send(JSON.stringify(err))
+      }
+    });
+  }
 }
