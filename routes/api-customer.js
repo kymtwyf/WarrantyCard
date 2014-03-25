@@ -33,10 +33,41 @@ exports.register = function(req, res){
     });
     customer.save(function(err,product){
       if(!err){
-        res.send(JSON.stringify(product));
+          res.send(JSON.stringify({
+            status:'success',
+            user:product
+          })
+        );
       }else{
-        res.send(JSON.stringify(err))
+        res.render('errorPage',{
+          title:'errorpage',
+          reason: err
+        })
+        // res.send(JSON.stringify(err))
       }
     });
+  }else{
+    var invalidUser = {
+      status: 'error',
+      reason: 'INVALID-USER'
+    }
+    res.send(JSON.stringify(invalidUser));
   }
+}
+
+//change including [update, delete]
+exports.change = function(req,res){
+  console.log('the change request body'+util.inspect(req.body));
+
+}
+
+exports.login = function(req,res){
+  console.log('the login request body'+util.inspect(req.body));
+  var customer = Customer.findOneByNamePassword(req.body.name,req.body.password);
+
+}
+
+exports.logout = function(req,res){
+  console.log('the logout request body'+util.inspect(req.body));
+  
 }

@@ -7,7 +7,8 @@ var schema = new database.Schema({
   password_md5: String,
   email: {type: String, index: {unique: true}},
   address:String,
-  telephone:String
+  telephone:String,
+  status:String//ACTIVE, DELETED
 });
 
 schema.statics.md5 = function (str) {
