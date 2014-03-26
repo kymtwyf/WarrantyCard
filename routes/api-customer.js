@@ -1,6 +1,6 @@
 var util = require('util');
 var Customer = require('../models/customer');
-
+var errorHelper = require('./api-helper').handleError;
 var USER_NAME_MAX = 16;
 var USER_NAME_MIN = 2;
 var RESERVED_NAMES = [
@@ -21,53 +21,54 @@ function validateRegister(req) {
   return true;
 }
 exports.register = function(req, res){
-  console.log(util.inspect(req.body));
+  console.log('the request send by register is:'+util.inspect(req.body));
   // res.send(404);
   if(validateRegister(req)){
     var customer = new Customer({
       name:req.body.name,
       password:req.body.password,
       email:req.body.email,
-      address:req.body.address,
-      telephone:req.body.telephone,
+      address:req.body.address?req.body.address:null,
+      telephone:req.body.telephone?req.body.telephone:null,
     });
     customer.save(function(err,product){
       if(!err){
+        if(req.body.redirect){
+          console.log('redirecting to ' + redirect);
+          res.redirect(redirect);
+        }else{
           res.send(JSON.stringify({
             status:'success',
             user:product
           })
-        );
+          );
+        }
       }else{
-        res.render('errorPage',{
-          title:'errorpage',
-          reason: err
-        })
-        // res.send(JSON.stringify(err))
+        errorHelper(req,res,err);
       }
     });
   }else{
-    var invalidUser = {
-      status: 'error',
+    var err = {
       reason: 'INVALID-USER'
     }
-    res.send(JSON.stringify(invalidUser));
+    errorHelper(res,req,err);
+    // res.send(JSON.stringify(invalidUser));
   }
 }
 
 //change including [update, delete]
 exports.change = function(req,res){
-  console.log('the change request body'+util.inspect(req.body));
+  console.log('the change request body' + util.inspect(req.body));
 
 }
 
 exports.login = function(req,res){
-  console.log('the login request body'+util.inspect(req.body));
+  console.log('the login request body' + util.inspect(req.body));
   var customer = Customer.findOneByNamePassword(req.body.name,req.body.password);
 
 }
 
 exports.logout = function(req,res){
-  console.log('the logout request body'+util.inspect(req.body));
+  console.log('the logout request body' + util.inspect(req.body));
   
 }

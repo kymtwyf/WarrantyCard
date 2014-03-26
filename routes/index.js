@@ -8,5 +8,9 @@ module.exports = function(app){
     res.writeHead('200',{'Content-Type':'application/json'});
     res.end(JSON.stringify(responseTest));
   });
-  app.post('/register',api.Customer.register);
+  //apis
+  app.post('/api/register',api.Customer.register);
+
+  //views
+  app.get('/register',api.Customer.register);
 }
