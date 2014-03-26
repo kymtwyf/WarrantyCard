@@ -3,22 +3,23 @@ var database = require('./database');
 var schema = new database.Schema({
   SN:String,
   KY:String,
-  seller:ObjectId,//reference to seller._id
-  shop:ObjectId,//reference to shop._id
-  customer:ObjectId,
+  seller:database.ObjectId,//reference to seller._id
+  shop:database.ObjectId,//reference to shop._id
+  customer:database.ObjectId,
   invoicePic:[],//Uri for invoice path
   note:String,
   message:[],//
-  status:{type: String, default: 'ACTIVE'},//ACTIVE,DELETED(PENDING)
 
   //detailed information
 
-  creator:ObjectId,//who created it
+  creator:database.ObjectId,//who created it
   createTime:{ type: Date, default: Date.now},//time created
+  
+  status:{type: String, default: 'ACTIVE'},//ACTIVE,DELETED(PENDING)
 
 })
 
 
 var WarrantyCard = database.model('WarrantyCard',schema);
 
-exports = WarrantyCard;
+module.exports = WarrantyCard;

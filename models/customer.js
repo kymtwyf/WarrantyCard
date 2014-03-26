@@ -8,7 +8,7 @@ var schema = new database.Schema({
   email: {type: String, index: {unique: true}},
   address:String,
   telephone:String,
-  status:String//ACTIVE, DELETED
+  status:{ type: String, default: 'ACTIVE'}//ACTIVE, DELETED
 });
 
 schema.statics.md5 = function (str) {

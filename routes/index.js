@@ -10,6 +10,7 @@ module.exports = function(app){
   });
   //apis
   app.post('/api/register',api.Customer.register);
+  app.post('/api/warrantycard/create',api.WarrantyCard.create);
 
   //views
   app.get('/test',api.test);

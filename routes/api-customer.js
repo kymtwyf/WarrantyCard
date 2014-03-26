@@ -1,6 +1,6 @@
 var util = require('util');
 var Customer = require('../models/customer');
-var errorHelper = require('./api-helper').handleError;
+var ERROR_HELPER = require('./api-helper').handleError;
 var USER_NAME_MAX = 16;
 var USER_NAME_MIN = 2;
 var RESERVED_NAMES = [
@@ -46,14 +46,14 @@ exports.register = function(req, res){
           );
         }
       }else{
-        errorHelper(req,res,err);
+        ERROR_HELPER(req,res,err);
       }
     });
   }else{
     var err = {
       reason: 'INVALID-USER'
     }
-    errorHelper(req,res,err);
+    ERROR_HELPER(req,res,err);
     // res.send(JSON.stringify(invalidUser));
   }
 }
