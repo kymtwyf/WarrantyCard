@@ -22,6 +22,8 @@ function validateRegister(req) {
 }
 exports.register = function(req, res){
   console.log('the request send by register is:'+util.inspect(req.body));
+  console.log('the request send by register is:'+util.inspect(req));
+
   // res.send(404);
   if(validateRegister(req)){
     var customer = new Customer({
