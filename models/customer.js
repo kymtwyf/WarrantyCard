@@ -3,7 +3,7 @@ var crypto = require('crypto');
 var util = require('util');
 
 var schema = new database.Schema({
-  name: {type: String, index: {unique: true}},
+  name: {type: String},
   password_md5: String,
   email: {type: String, index: {unique: true}},
   address:String,
