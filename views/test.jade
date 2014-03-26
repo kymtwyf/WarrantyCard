@@ -1,0 +1,16 @@
+
+
+block content
+  form#test-register(action='/api/register',method='post')
+    label(for='name') User Name
+    input.text(id='name',name=name)
+    label(for='password') Password
+    input.text(id='password',name=password)
+    label(for='email') email
+    input.text(id='email',name=email)
+    label(for='telephone') telephone
+    input.text(id='telephone',name=telephone)
+    label(for='address') address
+
+    input.text(id='address',name=address)
+    input.button(type='submit',value='Send')

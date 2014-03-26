@@ -12,5 +12,5 @@ module.exports = function(app){
   app.post('/api/register',api.Customer.register);
 
   //views
-  app.get('/register',api.Customer.register);
+  app.get('/test',api.test);
 }

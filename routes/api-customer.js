@@ -51,7 +51,7 @@ exports.register = function(req, res){
     var err = {
       reason: 'INVALID-USER'
     }
-    errorHelper(res,req,err);
+    errorHelper(req,res,err);
     // res.send(JSON.stringify(invalidUser));
   }
 }

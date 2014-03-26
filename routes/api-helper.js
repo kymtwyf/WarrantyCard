@@ -1,6 +1,6 @@
 exports.handleError = function(req,res,err){
  
-  if(typeof req.body.redirect === 'string'){
+  if(req.body && typeof req.body.redirect === 'string'){
     res.render('errorPage',{
       title:'Error',
       detail:err
