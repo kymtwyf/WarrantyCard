@@ -42,7 +42,7 @@ exports.create = function(req,res){
       SN:req.body.SN,
       KY:req.body.KY,      
       customer:req.body.customer,
-      creator:req.body.creator
+      creator:req.body.creator,
       
       note:req.body.note,
       seller:req.body.seller,
