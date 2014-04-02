@@ -58,15 +58,16 @@ exports.register = function(req, res){
   }
 }
 
-//change including [update, delete]
-exports.change = function(req,res){
-  console.log('the change request body' + util.inspect(req.body));
+//update including [update, delete]
+exports.update = function(req,res){
+  console.log('the update request body' + util.inspect(req.body));
 
 }
 
 exports.login = function(req,res){
   console.log('the login request body' + util.inspect(req.body));
   var customer = Customer.findOneByNamePassword(req.body.name,req.body.password);
+  
 
 }
 

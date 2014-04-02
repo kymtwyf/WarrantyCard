@@ -14,3 +14,17 @@ block content
 
     input.text(id='address',name='address')
     input.button(type='submit',value='Send')
+
+  form#test-warrantyCard(action='/api/warrantycard/create',method='post')
+    label(for='SN') SN
+    input.text(id='SN',name='SN',value='test')
+    label(for='KY') KY
+    input.text(id='KY',name='KY',value='test')
+    label(for='customer') customer
+    input.text(id='customer',name='customer',value='5332b14e49a2317028526cba')
+    label(for='creator') creator
+    input.text(id='creator',name='creator',value='5332b14e49a2317028526cba')
+    label(for='shop') shop
+
+    input.text(id='shop',name='shop',value='5332b14e49a2317028526cba')
+    input.button(type='submit',value='SendWarrantyInfo')

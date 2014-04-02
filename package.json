@@ -29,6 +29,5 @@
     "mongoose": "3.x",
     "when": "3.x",
     "jade": "1.x"
-
   }
 }

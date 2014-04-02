@@ -32,7 +32,7 @@ function verifyNecessaryInputs(body){
 
 }
 exports.create = function(req,res){
-  console.log('[warrantycard.create]'+util.inspect(req));
+  console.log('[warrantycard.create]'+util.inspect(req.body));
   //TODO: check permission
   var validInput = verifyNecessaryInputs(req.body);
   if(checkPermission(req) && validInput.result){
@@ -58,7 +58,7 @@ exports.create = function(req,res){
         }else{
           res.send(JSON.stringify({
             status:'success',
-            user:result
+            warrantycard:result
           })
           );
         }
@@ -74,4 +74,8 @@ exports.create = function(req,res){
       ERROR_HELPER(req,res,'NO PERMISSION');
     }
   }
+}
+exports.update = function(req,res){
+  console.log('[warrantycard.update]'+util.inspect(req.body));
+
 }

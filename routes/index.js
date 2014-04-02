@@ -14,4 +14,5 @@ module.exports = function(app){
 
   //views
   app.get('/test',api.test);
+  app.get('/register',api.Customer.register);
 }
