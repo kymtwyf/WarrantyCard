@@ -14,12 +14,17 @@ var schema = new database.Schema({
   //detailed information
 
   creator:database.ObjectId,//who created it
-  createTime:{ type: Date, default: Date.now},//time created
+  createTime:{ type: Date, default: Date.now, required:true},//time created
+  updateTime:{ type: Date, default: Date.now},
   expireTime:{ type: Date},
   status:{type: String, default: 'ACTIVE'},//ACTIVE,DELETED(PENDING)
 
 })
 
+schema.pre('save',function(next){
+  this.updateTime = new Date;
+  next();
+})
 
 var WarrantyCard = database.model('WarrantyCard',schema);
 

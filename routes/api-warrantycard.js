@@ -1,4 +1,5 @@
 var util = require('util');
+var User = require('../models/user');
 var WarrantyCard = require('../models/warrantycard');
 var ERROR_HELPER = require('./api-helper').handleError;
 
@@ -46,8 +47,7 @@ exports.create = function(req,res){
       
       note:req.body.note,
       seller:req.body.seller,
-      shop:req.body.shop,
-      createTime:req.body.createTime,
+      shop:req.body.shop
     });
 
     warr.save(function(err,result){
@@ -77,5 +77,68 @@ exports.create = function(req,res){
 }
 exports.update = function(req,res){
   console.log('[warrantycard.update]'+util.inspect(req.body));
+
+}
+
+exports.search = function(req,res){
+  console.log('[warrantycard.search]' + util.inspect(req.body));
+  var allErrors = {}
+  /*
+  //select conditions
+  conditions = {
+    field1:"abc",
+    field2:"def"
+  }
+  */
+  var conditions = req.body.conditions;
+ /* var pre_conditions = JSON.parse(req.body.conditions);
+ 先不考虑这种情况，
+  //search for the customer if no _id is offered
+  var searchCriterias = [];
+  if(pre_conditions.customer && !pre_conditions.customer._id){
+    var customer = when.defer();
+    User.findOne(pre_conditions,'_id',function(err,user){
+      if(err){
+        allErrors.findCustomerError = err;
+        customer.reject(err);
+        console.log('ERROR in warrantycard search when finding the customer');
+      }else{
+        customer.resolve(user)
+      }
+    })
+    searchCriterias.push(customer.promise);
+  }
+
+  var conditions = {}*/
+
+  /*
+  //select fields
+  fields = "field1 field2"
+  */
+  var fields = req.body.fields;
+  /*
+  //specify the options:
+  e.g. skip:0,
+        limit: 10,
+        sort :{
+          field1: -1
+        }
+  */
+
+  var options = req.body.options;
+
+  WarrantyCard.find(conditions,fields,options,function(err,warrantycards){
+    if(!err){
+      if(req.body.redirect){
+        // do something for the page
+      }else{
+        res.send({
+          status:'success',
+          warrantycards:warrantycards});
+      }
+    }else{
+      allErrors.findWarrantyCard = err;
+    }
+  })
 
 }

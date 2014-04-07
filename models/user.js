@@ -8,7 +8,10 @@ var schema = new database.Schema({
   email: {type: String, index: {unique: true}},
   address:String,
   telephone:String,
-  status:{ type: String, default: 'ACTIVE'}//ACTIVE, DELETED
+  status:{ type: String, default: 'ACTIVE'},//ACTIVE, DELETED
+  createTime:{type: Date, default: Date.now},
+  updateTime:{type: Date, default: Date.now },
+  role:{ type: String, default : 'customer'}
 });
 
 schema.statics.md5 = function (str) {
@@ -25,7 +28,11 @@ schema.statics.findOneByNamePassword = function (name, password) {
   return this.findOne({name: name, password_md5: password_md5});
 }
 
-var Customer = database.model('Customer', schema);
+schema.pre('save',function(next){
+  this.updateTime = new Date;
+  next();
+})
+var User = database.model('User', schema);
 
-module.exports = Customer;
+module.exports = User;
 
