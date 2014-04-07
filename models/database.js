@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-// mongoose.connect('mongodb://103.6.221.212:30000/WarrantyCard');
-mongoose.connect('mongodb://localhost/BS');
+mongoose.connect('mongodb://103.6.221.212:30000/WarrantyCard');
+// mongoose.connect('mongodb://localhost/BS');
 
 exports.mongoose = mongoose;
 exports.Schema = mongoose.Schema;
