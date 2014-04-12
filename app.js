@@ -15,6 +15,8 @@ app.configure(function () {
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(app.router);
+  
+  app.set('locale','cn');
 });
 
 app.configure('development', function () {

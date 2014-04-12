@@ -3,6 +3,7 @@ var responseTest = {
   studentId:"102891"
 }
 var api = require('./api');
+var desktop = require('./desktop');
 module.exports = function(app){
   app.get('/',function(req,res){
     res.writeHead('200',{'Content-Type':'application/json'});
@@ -21,5 +22,5 @@ module.exports = function(app){
 
   //views
   app.get('/test',api.test);
-  app.get('/register',api.User.register);
+  app.get('/register',desktop.user.register);
 }

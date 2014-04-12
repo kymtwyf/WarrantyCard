@@ -1,6 +1,7 @@
 var util = require('util');
 var when = require('when');
 var User = require('../models/user');
+var config = require('../config/config.json');
 var ERROR_HELPER = require('./api-helper').handleError;
 var USER_NAME_MAX = 16;
 var USER_NAME_MIN = 2;
@@ -100,6 +101,8 @@ exports.update = function(req,res){
 
 exports.login = function(req,res){
   var ret = when.defer();
+  var lang = req.app.get('locale');
+  console.log('the language for login is '+lang);
   ret.promise.then(function(user){
     if(user == null){
       ERROR_HELPER(req,res,"invalid username or password");
@@ -110,7 +113,10 @@ exports.login = function(req,res){
       //TODO deal with it !
     }
     if(req.body.redirect){
-      //render the homepage 
+      //render the homepage
+      res.render('test',{
+        locale:config[lang]
+      });
     }else{
       res.send(JSON.stringify({
         status:"success",
@@ -123,6 +129,7 @@ exports.login = function(req,res){
       }))
     }
   },function (err){
+    console.log("[user login] ERROR occurred");
     ERROR_HELPER(req,res,err)
   });
   console.log('the login request body' + util.inspect(req.body));

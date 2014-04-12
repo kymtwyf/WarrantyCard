@@ -2,8 +2,39 @@
   "en":{
     "app_name":"Online Warranty",
     "titles":{
-      "register_title":"Register",
-      
+      "register_title":"Register"      
+    },
+    "tags":{
+      "Header_Home":"Home",
+      "Header_About":"About",
+      "Header_MyWarrantyCards":"My Warranty Cards",
+      "Header_MyAppliances":"My Appliances",
+      "Header_MyProfile":"My Probile",
+      "Header_logout":"log out"
+    }
+  },
+  "cn":{
+    "app_name":"保修在线",
+    "registerPage":{
+      "register_title":"注册新帐户",
+      "email_placeholder":"*您的email帐户",
+      "password_placeholder":"*输入密码",
+      "rpt_pwd_placeholder":"*再次输入密码"
+    },
+    "tags":{
+      "Header_Home":"主页",
+      "Header_About":"关于",
+      "Header_MyWarrantyCards":"我的保修卡",
+      "Header_MyAppliances":"我的电器",
+      "Header_MyProfile":"个人信息",
+      "Header_logout":"登出",
+      "Header_username":"用戶名",
+      "Header_placeholder_username":"请输入用户名",
+      "Header_username":"密码",
+      "Header_placeholder_password":"请输入密码",
+      "Header_Signin":"登陆",
+      "Header_Register":"立即注册！"
+
     }
   }
 }

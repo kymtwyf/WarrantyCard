@@ -1,0 +1,29 @@
+body{
+  margin:10px;
+}
+html,
+body,
+body>#wrapper{
+  height:100%;
+  height: auto !important;
+  min-height: 100%;
+}
+.nav-pills{
+  float: left;
+}
+.nav-pills{
+  /*padding:10px 15px;*/
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.float-right{
+  float: right!important;
+}
+/*.center-row{
+  display:table;
+}
+.vertical-center{
+  float: none;
+  display:table-cell;
+  vertical-align:middle;
+}*/
