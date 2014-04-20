@@ -1,0 +1,11 @@
+.form-register,
+#form-signin{
+  max-width: 400px;
+  padding:15px;
+  margin: 0 auto;
+}
+
+#form-signin input{
+  margin-top:20px;
+  margin-bottom: 20px;
+} 

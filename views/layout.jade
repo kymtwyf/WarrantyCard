@@ -3,16 +3,17 @@ html
   include include/header
 
   body
-  #wrapper
+  #header
     .navbar-wrapper
       .container
         .navbar-header
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-collapse')
+            span.sr-only Toggle Navgation
             span.icon-bar
             span.icon-bar
             span.icon-bar
           a.navbar-brand= locale.app_name
-        .navbar-collapse.collapse
+        #navbar-collapse.navbar-collapse.collapse
             ul.nav.nav-pills
               li.active              
                 a(href='#')= locale.tags.Header_Home
@@ -33,20 +34,30 @@ html
                   a(href='#myprofile')= locale.tags.Header_MyProfile   
                     span.glyphicon.glyphicon-user
                 li
-                  a(href='#logout')= locale.tags.Header_logout
+                  a(href='/logout')= locale.tags.Header_logout
                     span.glyphicon.glyphicon-off
-            else 
-              if currentUrl != '/regisdter'
-                form.navbar-form.navbar-right(action='/api/login',method='post')
-                  input.text(type='hidden',name='redirect',value='/')
-                  .form-group
-                    input.form-control(name='user',placeholder="#{locale.tags.Header_placeholder_username}")
-                  .form-group
-                    input.form-control(name='password',type='password',placeholder="#{locale.tags.Header_placeholder_password}")
-                  button.btn.btn-success(type='submit')= locale.tags.Header_Signin
-                  a.btn-primary(href='/register')= locale.tags.Header_Register
+            else
+              ul.nav.navbar-nav.navbar-right(style='margin-top:5px;margin-bottom:10px')
+                if currentUrl != '/register'
+                  li
+                    form(action='/register',method='get')
+                      button.btn.btn-primary.form-control(type='submit')= locale.tags.Header_Register
+                li
+                  form(action='/login',method='get')
+                    button.btn.btn-success.form-control(type='submit',style='margin-left:20px')= locale.tags.Header_Signin
+
+
+              //- if currentUrl != '/regisdter'
+              //-   form#header_signin_form.navbar-form.navbar-right(action='/api/login',method='post')
+              //-     input.text(type='hidden',name='redirect',value='/')
+              //-     .form-group
+              //-       input.form-control(name='user',placeholder="#{locale.tags.Header_placeholder_username}")
+              //-     .form-group
+              //-       input.form-control(name='password',type='password',placeholder="#{locale.tags.Header_placeholder_password}")
+              //-     button.btn.btn-success(type='submit')= locale.tags.Header_Signin
+                //- a.btn-primary(href='/register')= locale.tags.Header_Register
 
 
 
-    block content 
+  block content 
 include include/footer

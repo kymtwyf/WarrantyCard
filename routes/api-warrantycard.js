@@ -1,6 +1,8 @@
 var util = require('util');
 var User = require('../models/user');
 var WarrantyCard = require('../models/warrantycard');
+var Appliance = require('../models/appliance');
+
 var ERROR_HELPER = require('./api-helper').handleError;
 
 function checkPermission(req){
@@ -39,33 +41,45 @@ exports.create = function(req,res){
   if(checkPermission(req) && validInput.result){
     console.log('[WarrantyCard.create] approved to be a valid user');
     console.log(WarrantyCard);
-    var warr = new WarrantyCard({
-      SN:req.body.SN,
-      KY:req.body.KY,      
-      customer:req.body.customer,
-      creator:req.body.creator,
-      
-      note:req.body.note,
-      seller:req.body.seller,
-      shop:req.body.shop
-    });
-
-    warr.save(function(err,result){
-      if(!err){
-        if(req.body.redirect){
-          console.log('redirecting to ' + redirect);
-          res.redirect(redirect);
-        }else{
-          res.send(JSON.stringify({
-            status:'success',
-            warrantycard:result
-          })
-          );
-        }
-      }else{
+    Appliance.findOne({SN:SN,KY:KY}).exec(function(err,appliance){
+      if(err){
+        console.log('error in finding the appliance ');
         ERROR_HELPER(req,res,err);
+        return;
       }
+      if(!appliance){
+        console.log("can't find the appliance with SN and KY number: "+SN+" "+KY);
+      }
+      var warr = new WarrantyCard({
+        SN:req.body.SN,
+        KY:req.body.KY,
+        appliance:appliance._id,    
+        customer:req.body.customer,
+        creator:req.body.creator,
+        
+        note:req.body.note,
+        seller:req.body.seller,
+        shop:req.body.shop
+      });
+
+      warr.save(function(err,result){
+        if(!err){
+          if(req.body.redirect){
+            console.log('redirecting to ' + redirect);
+            res.redirect(redirect);
+          }else{
+            res.send(JSON.stringify({
+              status:'success',
+              warrantycard:result
+            })
+            );
+          }
+        }else{
+          ERROR_HELPER(req,res,err);
+        }
+      })
     })
+    
   }else{
     if(!validInput.result){
       ERROR_HELPER(req,res,validInput.detail);

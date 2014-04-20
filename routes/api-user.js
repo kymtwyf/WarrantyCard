@@ -11,15 +11,15 @@ var RESERVED_NAMES = [
 var PASSWORD_MAX = 16;
 var PASSWORD_MIN = 4;
 function validateRegister(req) {
-  if (typeof req.body.name !== 'string' ||
-      req.body.name.length > USER_NAME_MAX ||
-      req.body.name.length < USER_NAME_MIN ||
-      req.body.name.length in RESERVED_NAMES)
-    return false;
-  if (typeof req.body.password !== 'string' ||
-      req.body.password.length > PASSWORD_MAX ||
-      req.body.password.length < PASSWORD_MIN)
-    return false;
+  // if (typeof req.body.name !== 'string' ||
+  //     req.body.name.length > USER_NAME_MAX ||
+  //     req.body.name.length < USER_NAME_MIN ||
+  //     req.body.name.length in RESERVED_NAMES)
+  //   return false;
+  // if (typeof req.body.password !== 'string' ||
+  //     req.body.password.length > PASSWORD_MAX ||
+  //     req.body.password.length < PASSWORD_MIN)
+  //   return false;
   return true;
 }
 exports.register = function(req, res){
@@ -32,22 +32,32 @@ exports.register = function(req, res){
       name:req.body.name,
       password:req.body.password,
       email:req.body.email,
-      address:req.body.address?req.body.address:null,
-      telephone:req.body.telephone?req.body.telephone:null,
+      address:req.body.address,
+      telephone:req.body.telephone,
       role:'customer'
     });
-    customer.save(function(err,product){
+    customer.save(function(err,user){
       if(!err){
-        if(req.body.redirect){
+        /*if(req.body.redirect){
           console.log('redirecting to ' + redirect);
           res.redirect(redirect);
         }else{
           res.send(JSON.stringify({
             status:'success',
-            user:product
+            user:user
           })
           );
-        }
+        }*/
+        res.send(JSON.stringify({
+          status:"success",
+          user:{
+            name:user.name,
+            email:user.email,
+            role:user.role,
+            _id:user._id
+          },
+          redirect:req.body.redirect
+        }))
       }else{
         ERROR_HELPER(req,res,err);
       }
@@ -105,39 +115,48 @@ exports.login = function(req,res){
   console.log('the language for login is '+lang);
   ret.promise.then(function(user){
     if(user == null){
-      ERROR_HELPER(req,res,"invalid username or password");
+      ERROR_HELPER(req,res,"invalid email or password");
       return;
     }
     console.log('find the user:'+ JSON.stringify(user))
     if(user.status != 'ACTIVE'){
       //TODO deal with it !
     }
-    if(req.body.redirect){
-      //render the homepage
-      res.render('test',{
-        locale:config[lang]
-      });
-    }else{
-      res.send(JSON.stringify({
-        status:"success",
-        user:{
-          name:user.name,
-          email:user.email,
-          role:user.role,
-          _id:user._id
-        }
-      }))
-    }
+    req.session.user = user;
+
+    console.log('session '+ util.inspect(req.session));
+
+    // if(req.body.redirect){
+    //   //render the homepage
+    //   res.redirect(req.body.redirect,{
+    //     locale:config[lang]
+    //   });
+    //   // res.render('test',{
+    //   //   locale:config[lang]
+    //   // });
+    // }else{
+    res.send(JSON.stringify({
+      status:"success",
+      user:{
+        name:user.name,
+        email:user.email,
+        role:user.role,
+        _id:user._id
+      },
+      redirect:req.body.redirect
+    }))
+    // }
   },function (err){
-    console.log("[user login] ERROR occurred");
+    console.log("[user login] ERROR occurred ");
+    console.log(err);
     ERROR_HELPER(req,res,err)
   });
   console.log('the login request body' + util.inspect(req.body));
   
-  if(!req.body.name || !req.body.password){
-    ret.reject("empty name or password");
+  if(!req.body.email || !req.body.password){
+    ret.reject("empty email or password");
   }
-  var user = User.findOneByNamePassword(req.body.name,req.body.password);
+  var user = User.findOneByEmailPassword(req.body.email,req.body.password);
   user.exec(function (err, user){
     if(err){
       ERROR_HELPER(req,res,err)
@@ -150,6 +169,8 @@ exports.login = function(req,res){
 
 exports.logout = function(req,res){
   console.log('the logout request body' + util.inspect(req.body));
+  delete req.session.user;
+  res.redirect('/');
   
 }
 

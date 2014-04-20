@@ -5,8 +5,8 @@ exports.test = function(req,res){
   console.log(JSON.stringify(config));
   res.render('test',{
     locale:config.cn,
-    user:{
-      abc:"ab"
-    }
+    // user:{
+    //   abc:"ab"
+    // }
   });
 }

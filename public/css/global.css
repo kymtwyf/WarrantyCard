@@ -1,12 +1,13 @@
-body{
-  margin:10px;
+body{background-color: #f6f7f1;}
+#header{
+  padding-top:15px;
+  border-bottom: 1px solid #e5e5e5;
+  letter-spacing: 
 }
-html,
-body,
-body>#wrapper{
-  height:100%;
-  height: auto !important;
-  min-height: 100%;
+#header a{
+  color: #333333;
+
+  letter-spacing:2px;
 }
 .nav-pills{
   float: left;
@@ -19,6 +20,10 @@ body>#wrapper{
 .float-right{
   float: right!important;
 }
+ul.nav.navbar-nav.navbar-right>li{
+  margin-top: 5px;
+}
+
 /*.center-row{
   display:table;
 }

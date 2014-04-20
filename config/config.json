@@ -17,9 +17,21 @@
     "app_name":"保修在线",
     "registerPage":{
       "register_title":"注册新帐户",
+      "name_placeholder":"您的姓名",      
       "email_placeholder":"*您的email帐户",
-      "password_placeholder":"*输入密码",
-      "rpt_pwd_placeholder":"*再次输入密码"
+      "password_placeholder":"*密码",
+      "rpt_pwd_placeholder":"*再次输入密码",
+      "phone_placeholder":"手机号",
+      "address_placeholder":"地址",
+      "button_register":"立即注册",
+      "warning_message":"内容错误，请填写正确后再试！"
+
+    },
+    "signinPage":{
+      "signin_title":"登陆",
+      "email_placeholder":"您的email",
+      "password_placeholder":"密码",
+      "login_button":"登陆"
     },
     "tags":{
       "Header_Home":"主页",

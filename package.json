@@ -19,15 +19,15 @@
   ],
   "author": "Wu Yongfeng (Kevian)",
   "license": "none",
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "dependencies": {
     "underscore": "~1.6.0",
     "express": "3.x",
     "mongodb": "1.x",
     "mongoose": "3.x",
     "when": "3.x",
-    "jade": "1.x"
+    "jade": "1.x",
+    "redis": "~0.10.1",
+    "connect-redis": "~1.4.7"
   }
 }

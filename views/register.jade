@@ -1,19 +1,35 @@
 extends layout
 block scripts
-  link(rel='stylesheet', href='/css/register.css')
+  script(type='text/javascript',src='/js/register.js')
+  link(rel='stylesheet', href='/css/register-login.css')
 block content
   .container
-    form.form-register.form-horizontal
-      h2.form-register-heading
+    form.form-register.form-horizontal(action='/api/register')
+      h2.form-register-heading.text-center
         |#{locale.registerPage.register_title} 
-      label.col-sm-3.control-label(for='email') 用户名
-      input.col-sm-7#email.form-control(type='email', placeholder='#{locale.registerPage.email_placeholder}', autofocus='autofocus')
-      input#password.form-control(type='password', placeholder='#{locale.registerPage.password_placeholder}')
-      input#rpt_pwd.form-control(type='password', placeholder='#{locale.registerPage.rpt_pwd_placeholder}')
-      input#phone.form-control(type='text', placeholder='#{locale.registerPage.rpt_pwd_placeholder}')
-      input#address.form-control
-      label.checkbox
-        input(type='checkbox', value='remember-me')
-        | Remember me
-      button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+      .form-group
+        label.control-label(for='email')= locale.registerPage.email_placeholder
+        input.form-control(name='email',type='email', placeholder='email')
+      .form-group
+        label.control-label(for='password')= locale.registerPage.password_placeholder
+        input.form-control(name='password',type='password', placeholder='password')
+      .form-group
+        label.control-label(for='rpt_password')= locale.registerPage.rpt_pwd_placeholder
+        input.form-control(name='rpt_password',type='password', placeholder='repeat password')
+      .form-group
+        label.control-label(for='name')= locale.registerPage.name_placeholder
+        input.form-control(name='name',type='text', placeholder='real name', autofocus='autofocus')
+      .form-group
+        label.control-label(for='phone')= locale.registerPage.phone_placeholder
+        input.form-control(name='phone',type='text', placeholder='phone number')
+      .form-group
+        label.control-label(for='address')= locale.registerPage.address_placeholder
+        input.form-control(name='address',type='text',placeholder="Address")
+      .alert.alert-danger.hidden
+        strong Warning! #{locale.registerPage.warning_message}
+      input.hidden(name='redirect',value='/login')
+      //- label.checkbox
+      //-   input(name='remember',type='checkbox', value='remember-me')
+      //-   | Remember me
+      button#register-submit.btn.btn-lg.btn-primary.btn-block(type='submit')= locale.registerPage.button_register
 

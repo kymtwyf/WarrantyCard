@@ -11,7 +11,7 @@ var schema = new database.Schema({
   status:{ type: String, default: 'ACTIVE'},//ACTIVE, DELETED
   createTime:{type: Date, default: Date.now},
   updateTime:{type: Date, default: Date.now },
-  role:{ type: String, default : 'customer'}
+  role:{ type: String, default : 'customer'}//customer salesman
 });
 
 schema.statics.md5 = function (str) {
@@ -26,6 +26,10 @@ schema.virtual('password').set(function (password) {
 schema.statics.findOneByNamePassword = function (name, password) {
   var password_md5 = schema.statics.md5(password);
   return this.findOne({name: name, password_md5: password_md5});
+}
+schema.statics.findOneByEmailPassword = function (email, password) {
+  var password_md5 = schema.statics.md5(password);
+  return this.findOne({email: email, password_md5: password_md5});
 }
 
 schema.pre('save',function(next){

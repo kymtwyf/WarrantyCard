@@ -2,8 +2,9 @@ var database = require('./database');
 
 var schema = new database.Schema({
   //要加保修记录
-  SN:String,
-  KY:String,
+  SN:String,//OPTIONAL
+  KY:String,//OPTIONAL
+  appliance:database.ObjectId,
   seller:database.ObjectId,//reference to seller._id
   shop:database.ObjectId,//reference to shop._id
   customer:database.ObjectId,
