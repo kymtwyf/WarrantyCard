@@ -1,0 +1,41 @@
+#cards{
+  margin-top: 50px;
+}
+#cards .card-title,
+#cards .card-body{
+  position: relative;
+  left:125px;
+  top:25px;
+}
+
+#cards .card-title span,
+#cards .card-body span{
+  margin-left: 20px;
+}
+#cards .card{
+  position: relative;
+  float:top;
+  height:150px;
+  min-width:720px;
+}
+#cards .appliance-pic{
+  position:relative;
+  top:-25px;
+  left:25px;
+  z-index: -100;
+  width:100px;
+  height:100px;
+  border-radius: 4px;
+  border: 1px solid #ddd; 
+}
+
+#cards button.view-details{
+  /*float:right;*/
+  position:relative;
+  left:80%;
+  top:20%;
+}
+
+#cards .card-body .warranty-status{
+  display:block;
+}

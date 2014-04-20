@@ -47,6 +47,15 @@
       "Header_Signin":"登陆",
       "Header_Register":"立即注册！"
 
+    },
+    "myCardsPage":{
+      "button_viewDetail":"查看详细",
+      "card_number":"保修卡号",
+      "appliance_name":"设备名称",
+      "warranty_date":"保修期",
+      "status":"保修状态",
+      "valid_status":"在保",
+      "invalid_status":"过保"
     }
   }
 }

@@ -2,6 +2,7 @@ var database = require('./database');
 
 var schema = new database.Schema({
   //要加保修记录
+  //要加
   SN:String,//OPTIONAL
   KY:String,//OPTIONAL
   appliance:database.ObjectId,

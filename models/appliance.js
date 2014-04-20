@@ -4,7 +4,7 @@ var schema = new database.Schema({
   name:String,
   SN:String,//Serial Number
   KY:String,// Model
-  picPath:{type,String, default:"/images/"}
+  picPath:{type:String, default:"/images/no-image.jpg"},
   instroPath:String,
   
   price:Number,
