@@ -7,6 +7,7 @@ block content
       each card in cards
         if(card.status == 'ACTIVE')
           #active-cards
+            +makeCard(card,"show")            
         else
           #inactive-cards
             +makeCard(card,"show")

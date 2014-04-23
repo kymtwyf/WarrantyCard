@@ -7,6 +7,7 @@ block content
       h2.form-signin.heading.text-center= locale.signinPage.signin_title
       input.form-control(name='email',placeholder='#{locale.signinPage.email_placeholder}')
       input.form-control(name='password',type='password',placeholder='#{locale.signinPage.password_placeholder}')
-      //- input.hidden(name='redirect',value='/')
+      
+      input.hidden(name='redirect',value='/')
       button#signin-submit.btn.btn-primary.btn-block(type='submit')= locale.signinPage.login_button
 

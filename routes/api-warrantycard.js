@@ -157,20 +157,13 @@ exports.search = function(req,res){
   })
 
 }
-
-exports.searchAllByUser = function(req,res){
-  /*
-  return all the detailed information needed for my warranty cards page
-  */
-  var userId = req.param("userId");
-  console.log('the user id is '+userId);
-  var allFound = when.defer();
-  var waitValues = [];
-  // User.findById()
-
+var function_searchAllByUser = function(userId){
+  var ret = when.defer();
   WarrantyCard.find({customer:userId},function(err,cards){
     if(!err){
-        console.log("---------the CARDS ARE "+util.inspect(cards));
+      var waitValues = [];
+
+      console.log("---------the CARDS ARE "+util.inspect(cards));
       cards.forEach
       (
         function(card){
@@ -195,7 +188,8 @@ exports.searchAllByUser = function(req,res){
                     appliance_name:appliance.name,
                     fromDate:card._id.getTimestamp(),
                     toDate:card.expireTime,
-                    appliance_pic_path:appliance.picPath
+                    appliance_pic_path:appliance.picPath,
+                    status:card.status
                   });
 
                   details.resolve(obj);
@@ -219,23 +213,30 @@ exports.searchAllByUser = function(req,res){
       // })
       when.all(waitValues).then(function(values){
         console.log("----------all the vaues found "+util.inspect(values));
-        allFound.resolve(values);
+        ret.resolve(values);
       },function(err){
         console.log("----------------error when.all.waitValues"+err)
-        allFound.reject();
+        ret.reject();
       })
     }else{
       console.log("----------------error when finding Warranty card")
       ret.reject(err);
     }
   });
-  
-
-
-  allFound.promise.then(function(values){
+  return ret.promise;
+}
+exports.searchAllByUser = function(req,res){
+  /*
+  return all the detailed information needed for my warranty cards page
+  */
+  var userId = req.param("userId");
+  console.log('the user id is '+userId);
+  var allFound = when.resolve(function_searchAllByUser(userId));
+  // User.findById()
+  allFound.then(function(values){
     res.send(JSON.stringify(values));    
   })
 
-
-
 }
+
+exports.function_searchAllByUser = function_searchAllByUser;

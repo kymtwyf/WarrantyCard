@@ -3,6 +3,7 @@ html
   include include/header
 
   body
+  -var user = session.user
   #header
     .navbar-wrapper
       .container
@@ -20,7 +21,7 @@ html
                   span.glyphicon.glyphicon-home
               if user
                 li
-                  a(href='#mycards')= locale.tags.Header_MyWarrantyCards
+                  a(href='/'+user._id+'/mywarrantycards')= locale.tags.Header_MyWarrantyCards
                 li
                   a(href='#myappliances')= locale.tags.Header_MyAppliances 
                 

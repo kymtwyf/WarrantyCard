@@ -123,29 +123,39 @@ exports.login = function(req,res){
       //TODO deal with it !
     }
     req.session.user = user;
-
+    res.locals.session = req.session;
     console.log('session '+ util.inspect(req.session));
 
-    // if(req.body.redirect){
-    //   //render the homepage
-    //   res.redirect(req.body.redirect,{
-    //     locale:config[lang]
-    //   });
-    //   // res.render('test',{
-    //   //   locale:config[lang]
-    //   // });
-    // }else{
-    res.send(JSON.stringify({
-      status:"success",
-      user:{
-        name:user.name,
-        email:user.email,
-        role:user.role,
-        _id:user._id
-      },
-      redirect:req.body.redirect
-    }))
-    // }
+    if(req.body.redirect){
+      //render the homepage
+      res.redirect("/"+user._id+"/home",{
+        locale:config[lang]
+      });
+      // res.render('test',{
+      //   locale:config[lang]
+      // });
+    }else{
+      res.send(JSON.stringify({
+        status:"success",
+        user:{
+          name:user.name,
+          email:user.email,
+          role:user.role,
+          _id:user._id
+        }
+      }))
+    }
+
+        // res.send(JSON.stringify({
+    //   status:"success",
+    //   user:{
+    //     name:user.name,
+    //     email:user.email,
+    //     role:user.role,
+    //     _id:user._id
+    //   },
+    //   redirect:req.body.redirect
+    // }))
   },function (err){
     console.log("[user login] ERROR occurred ");
     console.log(err);

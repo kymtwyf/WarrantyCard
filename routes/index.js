@@ -38,7 +38,10 @@ module.exports = function(app){
 
   //views
   app.get('/',preset,desktop.homepage);
-  app.get('/:id/home',preset,desktop.homepage);
+  app.get('/:id/home',filter,preset,desktop.homepage);
+  app.get('/:id/mywarrantycards',filter,preset,desktop.warrantycard.get)
+
+  
   app.get('/login',preset,desktop.user.login);
   app.get('/logout',preset,api.User.logout);
   app.get('/test',preset,api.test);
