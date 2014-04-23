@@ -11,14 +11,14 @@ block content
         else
           #inactive-cards
             +makeCard(card,"show")
-            +makeCard("","hidden")
+    +makeCard("","hidden")
 
 
 
 
 mixin makeCard(card,hidden)
   //- - var card = $.parseJSON(card)
-  .card-template.card(class='#{hidden}')
+  .card(class='#{hidden}')
     .card-title
       span.card-number= locale.myCardsPage.card_number+":"+(card.number?card.number:"")
       span.appliance-name= locale.myCardsPage.appliance_name+":"+(card.appliance_name?card.appliance_name:"")
