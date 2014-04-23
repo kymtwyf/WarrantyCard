@@ -27,6 +27,7 @@ module.exports = function(app){
   //apis
   app.post('/api/warrantycard/create',api.WarrantyCard.create);
   app.post('/api/warrantycard/search',api.WarrantyCard.search);
+  app.post('/api/warrantycard/:userId',api.WarrantyCard.searchAllByUser);
 
   app.post('/api/register',api.User.register);
   app.post('/api/signin',api.User.login);
@@ -37,6 +38,7 @@ module.exports = function(app){
 
   //views
   app.get('/',preset,desktop.homepage);
+  app.get('/:id/home',preset,desktop.homepage);
   app.get('/login',preset,desktop.user.login);
   app.get('/logout',preset,api.User.logout);
   app.get('/test',preset,api.test);

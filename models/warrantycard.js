@@ -9,7 +9,7 @@ var schema = new database.Schema({
   seller:database.ObjectId,//reference to seller._id
   shop:database.ObjectId,//reference to shop._id
   customer:database.ObjectId,
-  invoicePic:[],//Uri for invoice path
+  invoicePic:{type:String, default:"/images/no-image.jpg"},//Uri for invoice path
   note:String,
   message:[],//
 
@@ -18,7 +18,9 @@ var schema = new database.Schema({
   creator:database.ObjectId,//who created it
   createTime:{ type: Date, default: Date.now, required:true},//time created
   updateTime:{ type: Date, default: Date.now},
-  expireTime:{ type: Date},
+  //////----------------
+  expireTime:{ type: Date, default: new Date().setFullYear("2015")},
+  /////////////=-=-=-=-=-=-=-=-=-=-=-=-
   status:{type: String, default: 'ACTIVE'},//ACTIVE,DELETED(PENDING)
 
 })

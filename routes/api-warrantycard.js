@@ -1,4 +1,5 @@
 var util = require('util');
+var when = require('when');
 var User = require('../models/user');
 var WarrantyCard = require('../models/warrantycard');
 var Appliance = require('../models/appliance');
@@ -154,5 +155,87 @@ exports.search = function(req,res){
       allErrors.findWarrantyCard = err;
     }
   })
+
+}
+
+exports.searchAllByUser = function(req,res){
+  /*
+  return all the detailed information needed for my warranty cards page
+  */
+  var userId = req.param("userId");
+  console.log('the user id is '+userId);
+  var allFound = when.defer();
+  var waitValues = [];
+  // User.findById()
+
+  WarrantyCard.find({customer:userId},function(err,cards){
+    if(!err){
+        console.log("---------the CARDS ARE "+util.inspect(cards));
+      cards.forEach
+      (
+        function(card){
+              // var cardNumber = when.resolve(card._id);
+              // var appliance_number = when.defer();
+              // var fromDate = when.resolve(card._id.getTimestamp());
+              // var toDate = when.resolve(card.expireTime);
+              console.log("---------the card is "+util.inspect(card));
+              var details = when.defer();
+                            // [
+                            //   when.resolve(card._id),
+                            //   when.defer(),
+                            //   when.resolve(card._id.getTimestamp()),
+                            //   when.resolve(card.expireTime),
+                            //   when.defer()
+                            // ];
+              Appliance.findById(card.appliance,function(err,appliance){
+                if(!err){
+                  console.log("----------appliance found "+appliance);
+                  var obj = new Object({
+                    number:card._id,
+                    appliance_name:appliance.name,
+                    fromDate:card._id.getTimestamp(),
+                    toDate:card.expireTime,
+                    appliance_pic_path:appliance.picPath
+                  });
+
+                  details.resolve(obj);
+                  // details[1].resolve(appliance.name);//appliance_name
+                  // details[4].resolve(appliance.picPath);//appliance_pic_path
+                }else{
+                  console.log("----------error when finding the appliance")
+                  // details[1].reject(err);
+                  details.reject(err);
+                }
+              });
+      
+              waitValues.push(details.promise);
+      
+        }
+      )
+      // when.all(waitValues,function(values){
+      //   allFound.resolve(values);        
+      // },function(Err){
+      //   console.log("---------ERROR when .all.waitvalues"+util.inspect(values));
+      // })
+      when.all(waitValues).then(function(values){
+        console.log("----------all the vaues found "+util.inspect(values));
+        allFound.resolve(values);
+      },function(err){
+        console.log("----------------error when.all.waitValues"+err)
+        allFound.reject();
+      })
+    }else{
+      console.log("----------------error when finding Warranty card")
+      ret.reject(err);
+    }
+  });
+  
+
+
+  allFound.promise.then(function(values){
+    res.send(JSON.stringify(values));    
+  })
+
+
 
 }

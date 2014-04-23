@@ -16,3 +16,9 @@ exports.test = function(req,res){
           ]
   });
 }
+
+// exports.prepareData = function(req,res){
+//   res.render('test',{
+//     locale:config.cn
+//   })
+// }
