@@ -8,6 +8,16 @@ var appliance = when.defer();
 var customer = when.defer();
 var salesman = when.defer();
 
+new Appliance({
+  name:"testn SONY Laptop",
+  SN:"ABFADS",
+  KY:"QET",
+  detailPath:"http://detail.zol.com.cn/lcd/index356359.shtml",
+
+  price:"6500",
+  discount:"0.8",
+  status:"SOLD"
+}).save();
 // new Appliance({
 //   name:"SONY Laptop",
 //   SN:"VAIOEP1DASG13",
@@ -18,15 +28,15 @@ var salesman = when.defer();
 //   discount:"0.8",
 //   status:"SOLD"
 // }).save();
- new WarrantyCard({
-            SN:"VAIOEP1DASG13",
-            KY:"VAIO E",          
-            appliance:"5357f602371e1a3c2274cd1b",
-            customer:"5357cee2928a05e027323778",
-            seller:"5357cee2928a05e027323779",
-            note:"aiaiaiai",
-            creator:"5357cee2928a05e027323779"
-  }).save()
+ // new WarrantyCard({
+ //            SN:"VAIOEP1DASG13",
+ //            KY:"VAIO E",          
+ //            appliance:"5357f602371e1a3c2274cd1b",
+ //            customer:"5357cee2928a05e027323778",
+ //            seller:"5357cee2928a05e027323779",
+ //            note:"aiaiaiai",
+ //            creator:"5357cee2928a05e027323779"
+ //  }).save()
 
 // new Appliance({
 //   name:"PHILIPS Monitor",

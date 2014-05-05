@@ -128,9 +128,7 @@ exports.login = function(req,res){
 
     if(req.body.redirect){
       //render the homepage
-      res.redirect("/"+user._id+"/home",{
-        locale:config[lang]
-      });
+      res.redirect("/"+user._id+"/home");
       // res.render('test',{
       //   locale:config[lang]
       // });

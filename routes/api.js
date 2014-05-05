@@ -17,6 +17,13 @@ exports.test = function(req,res){
   });
 }
 
+exports.upload = function(req,res){
+  console.log('test upload');
+  res.render('uploadFile',{    locale:config.cn,
+
+  });
+}
+
 // exports.prepareData = function(req,res){
 //   res.render('test',{
 //     locale:config.cn

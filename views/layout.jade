@@ -3,7 +3,7 @@ html
   include include/header
 
   body
-  -var user = session.user
+  -var user = session?session.user?session.user:null:null
   #header
     .navbar-wrapper
       .container
@@ -16,10 +16,10 @@ html
           a.navbar-brand= locale.app_name
         #navbar-collapse.navbar-collapse.collapse
             ul.nav.nav-pills
-              li.active              
+              li            
                 a(href='#')= locale.tags.Header_Home
                   span.glyphicon.glyphicon-home
-              if user
+              if user && user.role == 'customer'
                 li
                   a(href='/'+user._id+'/mywarrantycards')= locale.tags.Header_MyWarrantyCards
                 li
@@ -29,7 +29,7 @@ html
               //-   a(href='#myappliances')= locale.tags.Header_MyAppliances 
               li
                 a(href='#about')= locale.tags.Header_About    
-            if user
+            if user && user.role == 'customer'
               ul.nav.navbar-nav.navbar-right
                 li
                   a(href='#myprofile')= locale.tags.Header_MyProfile   

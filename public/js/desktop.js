@@ -71,3 +71,17 @@
 //   )
 // })
 
+function clearAllActiveNav(){
+  $(".nav-pills a").each(function(index,element){
+      $(element).parent().removeClass("active");
+  });
+}
+$(document).ready(function(){
+  console.log("desktop onready");
+  var href = window.location.href;
+  // clearAllActiveNav();
+  if(href.indexOf('mywarrantycards') != -1){
+    $(".nav-pills a[href$='mywarrantycards']").parent().addClass("active");
+  }
+  
+})

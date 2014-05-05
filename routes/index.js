@@ -1,7 +1,7 @@
-var responseTest = {
-  name:"test",
-  studentId:"102891"
-}
+// var responseTest = {
+//   name:"test",
+//   studentId:"102891"
+// }
 var api = require('./api');
 var desktop = require('./desktop');
 
@@ -44,9 +44,19 @@ module.exports = function(app){
   
   app.get('/login',preset,desktop.user.login);
   app.get('/logout',preset,api.User.logout);
-  app.get('/test',preset,api.test);
   app.get('/register',preset,desktop.user.register);
   app.get('/filter',filter,preset,desktop.user.register);
 
+
+  //test
+  app.get('/test',preset,api.test);
+
+  app.get('/testUpload',api.upload);
+ 
+  app.post('/file-upload',function(req, res, next) {
+    console.log(req.body);
+    console.log(req.files);
+    // console.log(req.fields);
+  });
   app.get('/*',filter);
 }

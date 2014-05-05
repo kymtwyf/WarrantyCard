@@ -1,5 +1,6 @@
 var util = require('util');
 var when = require('when');
+var _ = require('underscore');
 var User = require('../models/user');
 var WarrantyCard = require('../models/warrantycard');
 var Appliance = require('../models/appliance');
@@ -38,11 +39,15 @@ function verifyNecessaryInputs(body){
 exports.create = function(req,res){
   console.log('[warrantycard.create]'+util.inspect(req.body));
   //TODO: check permission
+  // if(_.isEmpty(req.body)){
+  //   req.body = req.fields;
+  // }
   var validInput = verifyNecessaryInputs(req.body);
   if(checkPermission(req) && validInput.result){
     console.log('[WarrantyCard.create] approved to be a valid user');
     console.log(WarrantyCard);
-    Appliance.findOne({SN:SN,KY:KY}).exec(function(err,appliance){
+
+    Appliance.findOne({SN:req.body.SN,KY:req.body.KY}).exec(function(err,appliance){
       if(err){
         console.log('error in finding the appliance ');
         ERROR_HELPER(req,res,err);
@@ -56,6 +61,7 @@ exports.create = function(req,res){
         KY:req.body.KY,
         appliance:appliance._id,    
         customer:req.body.customer,
+        invoicePic:req.files.invoice.path,
         creator:req.body.creator,
         
         note:req.body.note,
