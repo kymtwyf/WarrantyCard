@@ -12,7 +12,7 @@ var schema = new database.Schema({
   invoicePic:{type:String, default:"/images/no-image.jpg"},//Uri for invoice path
   note:String,
   message:[],//
-
+  
   //detailed information
 
   creator:database.ObjectId,//who created it
@@ -21,8 +21,8 @@ var schema = new database.Schema({
   //////----------------
   expireTime:{ type: Date, default: new Date().setFullYear("2015")},
   /////////////=-=-=-=-=-=-=-=-=-=-=-=-
-  status:{type: String, default: 'ACTIVE'},//ACTIVE,DELETED(PENDING)
-
+  status:{type: String, default: 'ACTIVE'},//ACTIVE,INACTIVE,DELETED(PENDING)
+  
 })
 
 schema.pre('save',function(next){

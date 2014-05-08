@@ -18,7 +18,7 @@ app.configure(function () {
   app.use(express.cookieParser());
   app.use(express.session({
     secret: 'ExkzTuYGM9YJ7fdvWmhcucqI1BikriJlU9a2DlTCfi5hy0XoUO',
-    store: new RedisStore({host: '103.6.221.224', port: 6379, client: redis})
+    store: new RedisStore({host: '103.6.221.224', port: 6379, client: redis,ttl:600})
   }));
   app.set('locale','cn');
   app.use(app.router);

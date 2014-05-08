@@ -1,0 +1,53 @@
+extends layout
+block scripts
+  link(rel='stylesheet',href='/css/mywarrantycards.css')
+block content
+  #page.container
+    #cards
+      each card in cards
+        if(card.status == 'ACTIVE')
+          .active-card(id='#{card.number}')
+            +makeCard(card,"show")            
+        else
+          .inactive-cards(id='#{card.number}')
+            +makeCard(card,"show")
+    +makeCard("","hidden")
+
+
+
+
+mixin makeCard(card,hidden)
+  //- - var card = $.parseJSON(card)
+  .card(class='#{hidden}')
+    .row.card-general
+      a.col-md-3.thumbnail(href="#{card?card.appliance?card.appliance.detailPath:null:null}")
+        img.appliance-pic(src="#{card.appliance_pic_path}")
+      .card-body.col-md-9
+        h4.card-number= locale.myCardsPage.card_number+":"+(card.number?card.number:"")
+        h4.appliance-name= locale.myCardsPage.appliance_name+":"+(card.appliance_name?card.appliance_name:"")
+       
+        h1.warranty-status
+          span.warranty-status-text= (card.status?locale.myCardsPage.valid_status:locale.myCardsPage.invalid_status)
+        .card-opeartions
+          //- button.view-details.btn.btn-success= locale.myCardsPage.button_apply_for_service+" "
+          //-   badge.glyphicon.glyphicon-arrow-down
+          button.view-details.btn.btn-default= locale.myCardsPage.button_viewDetail+" "
+            badge.glyphicon.glyphicon-chevron-down
+    .row.card-detail
+      //- a.btn.btn-default.col-md-offset-3#instruction(href="#{card?card.appliance?card.appliance.detailPath:null:null}")= locale.myCardsPage.user_instruction
+      h4.note.col-md-2
+        .label.label-default.note-label= locale.myCardsPage.note
+        .row.note-text= card.card?card.card.note?card.card.note:locale.myCardsPage.no_note:locale.myCardsPage.no_note
+      span #{locale.myCardsPage.warranty_date}
+      span.date.date-from= (card.fromDate?card.fromDate.toLocaleDateString():"") + " ~ "
+      span.date.date-to= card.toDate?card.toDate.toLocaleDateString():""
+
+
+
+
+
+
+
+
+    
+      

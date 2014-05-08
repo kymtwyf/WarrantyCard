@@ -83,5 +83,9 @@ $(document).ready(function(){
   if(href.indexOf('mywarrantycards') != -1){
     $(".nav-pills a[href$='mywarrantycards']").parent().addClass("active");
   }
+
+  if(href.indexOf('managecards') != -1){
+    $(".nav-pills a[href$='managecards']").parent().addClass("active");
+  }
   
 })

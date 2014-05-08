@@ -45,17 +45,25 @@
       "Header_username":"密码",
       "Header_placeholder_password":"请输入密码",
       "Header_Signin":"登陆",
-      "Header_Register":"立即注册！"
+      "Header_Register":"立即注册！",
+      "Header_Salesman_WarrantyCards":"保修卡管理",
+      "Header_Salesman_Appliances":"产品管理"
+
 
     },
     "myCardsPage":{
       "button_viewDetail":"查看详细",
       "card_number":"保修卡号",
       "appliance_name":"设备名称",
-      "warranty_date":"保修期",
+      "warranty_date":"保修期: ",
       "status":"保修状态",
       "valid_status":"在保",
-      "invalid_status":"过保"
+      "invalid_status":"过保",
+      "user_instruction":"查看使用说明",
+      "button_apply_for_service":"申请保修",
+      "text_applied":"已申请保修",
+      "note":"备注",
+      "no_note":"无"
     }
   }
 }

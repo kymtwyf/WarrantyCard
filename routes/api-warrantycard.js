@@ -195,7 +195,9 @@ var function_searchAllByUser = function(userId){
                     fromDate:card._id.getTimestamp(),
                     toDate:card.expireTime,
                     appliance_pic_path:appliance.picPath,
-                    status:card.status
+                    status:card.status,
+                    card:card,
+                    appliance:appliance
                   });
 
                   details.resolve(obj);

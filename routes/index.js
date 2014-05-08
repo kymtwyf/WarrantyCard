@@ -13,8 +13,23 @@ function preset(req,res,next){
 }
 
 function filter(req,res,next){
+  // console.log(req);
+  console.log('filtering');
+  console.log(req.session.user);
   if(!req.session.user){
     res.redirect('/login');
+  }else if (req.session.user.role == 'salesman'){
+    var valid = false;
+    console.log("||| is salesman");
+    if(req.route.path.indexOf('/managecards')!= -1){
+      invalid = true;
+    }
+
+    if(valid){
+      res.send(403);
+    }else{
+      next();
+    }
   }else{
     next();
   }
@@ -24,6 +39,7 @@ module.exports = function(app){
   //   res.writeHead('200',{'Content-Type':'application/json'});
   //   res.end(JSON.stringify(responseTest));
   // });
+
   //apis
   app.post('/api/warrantycard/create',api.WarrantyCard.create);
   app.post('/api/warrantycard/search',api.WarrantyCard.search);
@@ -36,16 +52,17 @@ module.exports = function(app){
   app.post('/api/user/searchSellers',api.User.searchSellers);
   app.post('/api/user/searchCustomers',api.User.searchCustomers);
 
-  //views
-  app.get('/',preset,desktop.homepage);
-  app.get('/:id/home',filter,preset,desktop.homepage);
-  app.get('/:id/mywarrantycards',filter,preset,desktop.warrantycard.get)
 
+  //views
+  app.get('/',preset,desktop.customer.homepage);
+  app.get('/:id/home',preset,filter,desktop.customer.homepage);
+  app.get('/:id/mywarrantycards',preset,filter,desktop.customer.get)
+  app.get('/managecards',preset,filter,desktop.salesman.managecards);
   
   app.get('/login',preset,desktop.user.login);
   app.get('/logout',preset,api.User.logout);
   app.get('/register',preset,desktop.user.register);
-  app.get('/filter',filter,preset,desktop.user.register);
+  app.get('/filter',preset,filter,desktop.user.register);
 
 
   //test

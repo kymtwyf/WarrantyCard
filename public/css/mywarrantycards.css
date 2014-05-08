@@ -1,7 +1,6 @@
 #page{
   background: #f7f8f6;
   min-height: 768px;
-
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.15);
   -moz-box-shadow: 0 0 5px rgba(0,0,0,0.15);
   box-shadow: 0 0 5px rgba(0,0,0,0.15);
@@ -10,43 +9,67 @@
 #cards{
   margin-top: 50px;
 }
-#cards .card-title,
-#cards .card-body{
-  position: relative;
-  left:125px;
-  top:25px;
+#cards .active-card{
+  min-width:720px;
+  border-bottom: 1px solid #dddddd;
+  /*border-top: 1px solid #dddddd;*/
+
+}
+/*.card{
+  max-width: 900px;
+  margin:auto;
+}*/
+.card .thumbnail{
+  margin:2%;
+  width:150px;
+  height:150px;
+}
+.card .card-body{
+  margin-top:20px;
+}
+.active-card .card .warranty-status{
+  position: absolute;
+  top:-20px;
+  right:10px;
+  width:90px;
+  height: 90px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: 6px solid #d2e8ea;
+}
+.warranty-status-text{
+  display:block;
+  font-family: "Helvetica Neue", Arial;
+  font-weight: bold;
+  color:#769bb3;;
+  position:relative;
+  padding-top:20px;
 }
 
-#cards .card-title span,
-#cards .card-body span{
+.card-body .view-details{
+  position:relative;
+  /*left:25%;*/
+  top:50px;
+}
+
+.card-detail .note-text {
+  margin-top: 20px;
   margin-left: 20px;
 }
-#cards .card{
-  position: relative;
-  float:top;
-  height:150px;
-  min-width:720px;
-
-  border-bottom: 1px solid #dddddd;
-}
-#cards .appliance-pic{
-  position:relative;
-  top:-25px;
-  left:25px;
-  /*z-index: -100;*/
-  width:100px;
-  height:100px;
-  border-radius: 4px;
-  border: 1px solid #ddd; 
-}
-
-#cards button.view-details{
-  /*float:right;*/
+/*.card-detail .note{
+  border=
+}*/
+/*#cards button.view-details{
+  float:right;
   position:relative;
   left:75%;
   top:20%;
-}
-
+}*/
+/*
 #cards .card-body .warranty-status{
   display:block;
 }
+
+.card-detail{
+  margin-top:20px;
+}*/

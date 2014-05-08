@@ -17,19 +17,24 @@ html
         #navbar-collapse.navbar-collapse.collapse
             ul.nav.nav-pills
               li            
-                a(href='#')= locale.tags.Header_Home
+                a(href='/')= locale.tags.Header_Home
                   span.glyphicon.glyphicon-home
               if user && user.role == 'customer'
                 li
                   a(href='/'+user._id+'/mywarrantycards')= locale.tags.Header_MyWarrantyCards
                 li
                   a(href='#myappliances')= locale.tags.Header_MyAppliances 
-                
+              else if user && user.role == 'salesman'
+                li
+                  a(href='/managecards')= locale.tags.Header_Salesman_WarrantyCards
+                li
+                  a(href='#appliances')= locale.tags.Header_Salesman_Appliances 
+
               //- li
               //-   a(href='#myappliances')= locale.tags.Header_MyAppliances 
               li
-                a(href='#about')= locale.tags.Header_About    
-            if user && user.role == 'customer'
+                a(href='javascript:;')= locale.tags.Header_About    
+            if user 
               ul.nav.navbar-nav.navbar-right
                 li
                   a(href='#myprofile')= locale.tags.Header_MyProfile   
@@ -37,7 +42,7 @@ html
                 li
                   a(href='/logout')= locale.tags.Header_logout
                     span.glyphicon.glyphicon-off
-            else
+            else 
               ul.nav.navbar-nav.navbar-right(style='margin-top:5px;margin-bottom:10px')
                 if currentUrl != '/register'
                   li
