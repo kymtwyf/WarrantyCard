@@ -3,11 +3,11 @@ var database = require('./database');
 var schema = new database.Schema({
   //要加保修记录
   //要加
-  SN:String,//OPTIONAL
-  KY:String,//OPTIONAL
+  // SN:String,//OPTIONAL
+  // KY:String,//OPTIONAL
   appliance:database.ObjectId,
-  seller:database.ObjectId,//reference to seller._id
-  shop:database.ObjectId,//reference to shop._id
+  // seller:database.ObjectId,//reference to seller._id
+  // shop:database.ObjectId,//reference to shop._id
   customer:database.ObjectId,
   invoicePic:{type:String, default:"/images/no-image.jpg"},//Uri for invoice path
   note:String,
@@ -26,7 +26,7 @@ var schema = new database.Schema({
 })
 
 schema.pre('save',function(next){
-  this.updateTime = new Date;
+  this.updateTime = new Date();
   next();
 })
 

@@ -41,9 +41,13 @@ module.exports = function(app){
   // });
 
   //apis
+  app.post('/api/appliance/search',api.Appliance.search);
+
   app.post('/api/warrantycard/create',api.WarrantyCard.create);
   app.post('/api/warrantycard/search',api.WarrantyCard.search);
+  app.post('/api/warrantycard/insertMessage',api.WarrantyCard.insertMessage);
   app.post('/api/warrantycard/:userId',api.WarrantyCard.searchAllByUser);
+
 
   app.post('/api/register',api.User.register);
   app.post('/api/signin',api.User.login);
@@ -56,7 +60,11 @@ module.exports = function(app){
   //views
   app.get('/',preset,desktop.customer.homepage);
   app.get('/:id/home',preset,filter,desktop.customer.homepage);
-  app.get('/:id/mywarrantycards',preset,filter,desktop.customer.get)
+  app.get('/:id/mywarrantycards',preset,filter,desktop.customer.get);
+  app.get('/:id/warrantycard/:cardId',preset,filter,desktop.customer.get);
+
+  app.get('/:id/myappliances',preset,filter,desktop.customer.myappliances);
+  app.get('/managecards/create',preset,filter,desktop.salesman.createCard);  
   app.get('/managecards',preset,filter,desktop.salesman.managecards);
   
   app.get('/login',preset,desktop.user.login);

@@ -187,7 +187,7 @@ var findAllUsers = function(req,res){
   var fields = req.body.fields;
   switch(req.body.userRole){
     case 'customer':conditions.role = 'customer'; break;
-    case 'seller':conditions.role = 'seller'; break;
+    case 'salesman':conditions.role = 'salesman'; break;
     default :;
   }
   var options = req.body.options;
@@ -218,12 +218,22 @@ exports.searchCustomers = function(req,res){
 
 exports.searchSellers = function(req,res){
   console.log('[api-user] searchAllSellers '+ util.inspect(req.body));
-  req.body.userRole = 'seller';
+  req.body.userRole = 'salesman';
   findAllUsers(req,res);
 }
 
 exports.findAllUsers = findAllUsers;
 
+exports.delete = function(req,res){
+  var userId = req.body.userId;
+  User.findOne({_id:userId},function(err,user){
+    if(err){
+
+    }else{
+      user.delete();
+    }
+  })
+}
 // exports.promiseSearchOne = function(conditions,fields,options){
 //   var ret = when.defer();
 //   User.findOne(conditions,fields,options,function(err,user){

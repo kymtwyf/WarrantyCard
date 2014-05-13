@@ -1,12 +1,13 @@
 extends layout
 
-block content
-  #messages.container
-    
+block content  
   #search.container
     .input-group.col-md-4.pull-right
       input.form-control(type='text',placeholder='Search')
       span.input-group-btn
         button.btn.btn-default#searchcard
           span.glyphicon.glyphicon-search
-  //- #createCard.container
+  #messages.container
+    |、
+  #createCard.container
+    a.btn.btn-default(href="/managecards/create")= locale.manageCards.create_card

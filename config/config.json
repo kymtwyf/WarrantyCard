@@ -63,7 +63,27 @@
       "button_apply_for_service":"申请保修",
       "text_applied":"已申请保修",
       "note":"备注",
-      "no_note":"无"
+      "no_note":"无",
+      "no_message":"没有留言",
+      "messages":"所有留言",
+      "button_postmessage":"留言"
+    },
+    "manageCards":{
+      "message_title":"全部消息",
+      "no_message":"无消息",
+      "create_card":"创建保修卡",
+      "user_email":"顾客邮箱*",
+      "SN":"设备序列号*",
+      "KY":"设备型号",
+      "note":"备注",
+      "invoice":"上传发票*",
+      "submit":"提交",
+      "click_to_register":", 点击注册",
+      "success":"创建成功",
+      "fail":"创建失败"
+
+
+
     }
   }
 }

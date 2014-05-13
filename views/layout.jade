@@ -23,7 +23,7 @@ html
                 li
                   a(href='/'+user._id+'/mywarrantycards')= locale.tags.Header_MyWarrantyCards
                 li
-                  a(href='#myappliances')= locale.tags.Header_MyAppliances 
+                  a(href='/'+user._id+'/myappliances')= locale.tags.Header_MyAppliances 
               else if user && user.role == 'salesman'
                 li
                   a(href='/managecards')= locale.tags.Header_Salesman_WarrantyCards

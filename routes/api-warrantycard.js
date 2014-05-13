@@ -4,6 +4,7 @@ var _ = require('underscore');
 var User = require('../models/user');
 var WarrantyCard = require('../models/warrantycard');
 var Appliance = require('../models/appliance');
+var ServiceRecord = require('../models/servicerecord');
 
 var ERROR_HELPER = require('./api-helper').handleError;
 
@@ -39,9 +40,7 @@ function verifyNecessaryInputs(body){
 exports.create = function(req,res){
   console.log('[warrantycard.create]'+util.inspect(req.body));
   //TODO: check permission
-  // if(_.isEmpty(req.body)){
-  //   req.body = req.fields;
-  // }
+ 
   var validInput = verifyNecessaryInputs(req.body);
   if(checkPermission(req) && validInput.result){
     console.log('[WarrantyCard.create] approved to be a valid user');
@@ -56,17 +55,32 @@ exports.create = function(req,res){
       if(!appliance){
         console.log("can't find the appliance with SN and KY number: "+SN+" "+KY);
       }
+      // appliance.update({})
+      var filePath ;
+      if(req.files.invoice){
+        var filename;
+        var path = req.files.invoice.path;
+        if(path.indexOf('\/')!= -1){
+          // var arrey = path.split('\/');
+          filename = _.last(path.split('\/'));
+        }else{          
+          filename = _.last(path.split('\\'));
+        }
+        console.log('[][][][][]filename '+filename);
+        filePath = "/uploaded/"+filename;
+        
+      }
       var warr = new WarrantyCard({
-        SN:req.body.SN,
-        KY:req.body.KY,
+        // SN:req.body.SN,
+        // KY:req.body.KY,
         appliance:appliance._id,    
         customer:req.body.customer,
-        invoicePic:req.files.invoice.path,
+        invoicePic:filePath,
         creator:req.body.creator,
         
         note:req.body.note,
-        seller:req.body.seller,
-        shop:req.body.shop
+        // seller:req.body.seller,
+        // shop:req.body.shop
       });
 
       warr.save(function(err,result){
@@ -242,9 +256,44 @@ exports.searchAllByUser = function(req,res){
   var allFound = when.resolve(function_searchAllByUser(userId));
   // User.findById()
   allFound.then(function(values){
+    // values = _.
     res.send(JSON.stringify(values));    
   })
 
 }
 
 exports.function_searchAllByUser = function_searchAllByUser;
+
+exports.insertMessage = function(req,res){
+  var warrantyId = req.body.warrantyId;
+
+  var message = {};
+  
+  var user = req.body.user;
+  // var message = req.body.message;
+  message.userName = user?user.name?user.name:"no-name":"no-name";
+  message.message = req.body.message;
+  message.postDate = new Date();
+  WarrantyCard.findByIdAndUpdate(warrantyId,{$pushAll: {message:[message]}},{upsert:true},function(err){
+    if(err){
+      res.send({
+        status:"error",
+        detail:err
+      })
+    }else{
+      res.send({
+        status:"success"
+      })
+    }
+  })
+
+}
+
+
+/*
+REFACTOR
+*/
+
+exports.newService = function(req,res){
+
+} 

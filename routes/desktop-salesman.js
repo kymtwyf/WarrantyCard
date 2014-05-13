@@ -5,11 +5,18 @@ var WarrantyCard = require('../models/warrantycard');
 var config = require('../config/config.json');
 
 //for salesman
-exports.new = function(req,res){
+exports.createCard = function(req,res){
+  var userId = req.session.user._id;
+  var lang = req.app.get('locale');
+
   
+  res.render('salesman-newcard',{
+    locale:config[lang]
+  })
 }
 
 exports.managecards = function(req,res){
+  var userId = req.session.user._id;
   var lang = req.app.get('locale');
   res.render('salesman-managecards',{
     locale:config[lang]

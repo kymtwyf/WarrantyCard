@@ -1,7 +1,9 @@
 extends layout
 block scripts
   link(rel='stylesheet',href='/css/mywarrantycards.css')
+  script(type='text/javascript',src='/js/mywarrantycard.js')
 block content
+  #userName.hidden= user?user.name:null
   #page.container
     #cards
       each card in cards
@@ -20,8 +22,9 @@ mixin makeCard(card,hidden)
   //- - var card = $.parseJSON(card)
   .card(class='#{hidden}')
     .row.card-general
-      a.col-md-3.thumbnail(href="#{card?card.appliance?card.appliance.detailPath:null:null}")
-        img.appliance-pic(src="#{card.appliance_pic_path}")
+      a.col-md-3.thumbnail
+        //-(href="#{card?card.appliance?card.appliance.detailPath:null:null}")
+        img.appliance-pic(src="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
       .card-body.col-md-9
         h4.card-number= locale.myCardsPage.card_number+":"+(card.number?card.number:"")
         h4.appliance-name= locale.myCardsPage.appliance_name+":"+(card.appliance_name?card.appliance_name:"")
@@ -38,11 +41,34 @@ mixin makeCard(card,hidden)
       h4.note.col-md-2
         .label.label-default.note-label= locale.myCardsPage.note
         .row.note-text= card.card?card.card.note?card.card.note:locale.myCardsPage.no_note:locale.myCardsPage.no_note
-      span #{locale.myCardsPage.warranty_date}
-      span.date.date-from= (card.fromDate?card.fromDate.toLocaleDateString():"") + " ~ "
-      span.date.date-to= card.toDate?card.toDate.toLocaleDateString():""
+      .detail.col-md-10
+        span #{locale.myCardsPage.warranty_date}
+        span.date.date-from= (card.fromDate?card.fromDate.toLocaleDateString():"") + " ~ "
+        span.date.date-to= card.toDate?card.toDate.toLocaleDateString():""
+        .messageList
+        -var messages = card?card.card.message:[]
+        if messages.length == 0
+          h4= locale.myCardsPage.no_message
+        else
+          h4= locale.myCardsPage.messages
+          each message in messages
+            //- li= message.userName
+            -console.log(message);
+            if(message)
+              +messageList(message)
+        form.new-message.row
+          textarea.col-md-9.col-md-offset-1(name='message')
+          button.post-message.btn.btn-default.col-md-1.col-md-offset-1= locale.myCardsPage.button_postmessage
 
 
+
+mixin messageList(message)
+  if(message.postDate && message.userName && message.message)
+    .message-content
+      h4.poster-name= message.userName + ":"
+      h5
+        span.post-date.pull-right= message.postDate?message.postDate.toLocaleDateString():"no-date"
+      p.message= message.message
 
 
 

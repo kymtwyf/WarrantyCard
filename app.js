@@ -13,12 +13,12 @@ app.configure(function () {
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.bodyParser({keepExtensions: true, uploadDir: __dirname+'/uploaded'}));
+  app.use(express.bodyParser({keepExtensions: true, uploadDir: __dirname+'/public/uploaded'}));
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({
     secret: 'ExkzTuYGM9YJ7fdvWmhcucqI1BikriJlU9a2DlTCfi5hy0XoUO',
-    store: new RedisStore({host: '103.6.221.224', port: 6379, client: redis,ttl:600})
+    store: new RedisStore({host: '103.6.221.224', port: 6379, client: redis,ttl:12*60*60})
   }));
   app.set('locale','cn');
   app.use(app.router);

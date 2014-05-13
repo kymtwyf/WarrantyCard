@@ -1,17 +1,20 @@
 var database = require('./database');
 var crypto = require('crypto');
+var when = require('when');
 var util = require('util');
 
+var allStatus = ["ACTIVE", "DELETED"]
+var allRoles = ["customer","salesman"]
 var schema = new database.Schema({
   name: {type: String},
   password_md5: String,
   email: {type: String, index: {unique: true}},
   address:String,
   telephone:String,
-  status:{ type: String, default: 'ACTIVE'},//ACTIVE, DELETED
+  status:{ type: String, default: allStatus},//ACTIVE, DELETED
   createTime:{type: Date, default: Date.now},
   updateTime:{type: Date, default: Date.now },
-  role:{ type: String, default : 'customer'}//customer salesman
+  role:{ type: String, default : allRoles}//customer salesman
 });
 
 schema.statics.md5 = function (str) {
@@ -32,6 +35,28 @@ schema.statics.findOneByEmailPassword = function (email, password) {
   return this.findOne({email: email, password_md5: password_md5});
 }
 
+
+var saveCallBack = function(err,user){
+  var ret = when.defer();
+  if(err){
+    ret.reject();
+  }else{
+    ret.resolve(user);
+  }
+  return ret.promise;
+}
+
+schema.methods.delete = function(){
+  var ret = when.defer();
+  this.status = "DELETED";
+  this.save(function(err,user){
+    ret.resolve(saveCallBack(err,record));
+  });
+
+  return ret.promise;
+}
+
+
 schema.pre('save',function(next){
   this.updateTime = new Date;
   next();
@@ -39,4 +64,6 @@ schema.pre('save',function(next){
 var User = database.model('User', schema);
 
 module.exports = User;
+
+
 

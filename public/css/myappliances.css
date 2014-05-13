@@ -1,0 +1,17 @@
+.appliance-list {
+  margin-top: 50px;
+}
+.appliance {
+  /*height:100%;*/
+  /*margin:auto;*/
+  vertical-align: middle;
+  padding:20px;
+  text-align: center;
+
+}
+.appliance h3{
+  /*display:inline;*/
+  /*position: relative;*/
+  margin:auto;
+  
+}

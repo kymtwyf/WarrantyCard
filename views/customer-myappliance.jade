@@ -1,0 +1,14 @@
+extends layout
+block scripts
+  link(rel='stylesheet',href='/css/myappliances.css')
+block content
+  .container#page
+    .appliance-list
+      each card in cards
+        +makeAppliance(card)
+
+mixin makeAppliance(card)
+  .appliance.col-md-4
+    h3.appliance-name(href="#{card?card.appliance?card.appliance.detailPath:null:null}")=card.appliance.name
+    a.thumbnail
+      img.appliance-pic(src="#{card.card?card.appliance.picPath:'/images/appliances/default.jpg'}")
