@@ -1,0 +1,30 @@
+extends layout
+block scripts
+  link(rel='stylesheet',href='/css/personal-info.css')
+
+  link(rel='stylesheet',href='/css/bootstrap-editable.css')
+  script(type='text/javascript', src='/js/bootstrap-editable.js')
+  script(type='text/javascript', src='/js/personalinfo.js')
+block content
+  #page.container.personalinfo.wrapper
+    form.form-horizontal
+      h3.title.text-center= locale.personalInfo.title
+      a.pull-right.person-image.thumbnail(href='http://gravatar.com')
+        img(src='#{"http://gravatar.com/avatar/"+md5(user.email)+"?s=200"}',title='#{locale.personalInfo.goto_gravatar}')
+      .text-detail.col-md-5.col-md-offset-1
+        .person-name.detail.form-group
+          label.control-label.person-name-label= locale.personalInfo.name_label
+          a.person-name(data-name='name',data-type='text')= user.name
+        .person-email.detail.form-group
+          label.control-label.person-email-label= locale.personalInfo.email_label
+          a.person-email.editable-disabled(data-name='email',data-type='text')= user.email
+        .person-telephone.detail.form-group
+          label.control-label.person-telephone-label=locale.personalInfo.telephone_label
+          a.person-telephone(data-name='telephone',data-type='text')= user.telephone?user.telephone:locale.personalInfo.no_value    
+        .person-address.detail.form-group
+          label.control-label.person-address-label=locale.personalInfo.address_label
+          a.person-address(data-name='address',data-type='text')= user.address
+        .edit.center
+          a.btn.btn-primary.btn-edit.pull-right= locale.personalInfo.btn_edit
+          a.btn.btn-success.btn-save.hidden.pull-right= locale.personalInfo.btn_save
+          a.btn.btn-default.btn-cancel.hidden.pull-right= locale.personalInfo.btn_cancel

@@ -1,10 +1,12 @@
 extends layout
 block scripts
+
+  script(type='text/javascript',src='/js/bootstrap.file-input.js')
   script(type='text/javascript',src='/js/newcard.js')
   link(rel='stylesheet',href='/css/newcard.css')
 
 block content
-  #page.container
+  .container.wrapper
     h3.form-title.text-center= locale.manageCards.create_card
     form#new-card-form.form-horizontal(enctype='multipart/form-data')
       input.hidden(name='creator',value="#{user?user._id:null}")
@@ -43,14 +45,14 @@ block content
       .form-group
         label.control-label.col-md-2(for='invoice')= locale.manageCards.invoice
         .col-md-8
-          input.form-control(type='file',name='invoice')
+          input.form-control(type='file',name='invoice',title='#{locale.manageCards.click_to_upload}',data-filename-placement="inside")
         .col-md-2.invoice-alert
           img.hidden(src='/images/loading.gif')
           a.alert-text
       .row 
-        .alert-result.alert.alert-success.alert-dismissable.hidden.col-md-offset-6.col-md-2= locale.manageCards.success
-          button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
-        .alert-result.alert.alert-danger.alert-dismissable.hidden.col-md-offset-8.col-md-2= locale.manageCards.fail
-          button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
+        //- .alert-result.alert.alert-success.alert-dismissable.hidden.col-md-offset-6.col-md-2= locale.manageCards.success
+        //-   button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
+        //- .alert-result.alert.alert-danger.alert-dismissable.hidden.col-md-offset-8.col-md-2= locale.manageCards.fail
+        //-   button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
         #btn-submit.btn.btn-default.col-md-offset-10(type='submit')= locale.manageCards.submit
 

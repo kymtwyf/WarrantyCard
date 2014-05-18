@@ -1,11 +1,4 @@
-#page{
-  background: #f7f8f6;
-  min-height: 768px;
-  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.15);
-  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.15);
-  box-shadow: 0 0 5px rgba(0,0,0,0.15);
-  box-shadow: 0 0 5px rgba(0,0,0,0.3) \9;
-}
+
 #cards{
   margin-top: 50px;
 }
@@ -58,6 +51,7 @@
 .card-detail .note-text {
   margin-top: 20px;
   margin-left: 20px;
+  word-wrap: break-word;
 }
 .card-detail .messageList{
   border-top: solid 1px #e1e1e1;
@@ -69,6 +63,9 @@
 }
 .message-content .post-date{
   color: #bbb;
+}
+.hide-big-pic{
+  display:none;
 }
 /*.card-detail .note{
   border=

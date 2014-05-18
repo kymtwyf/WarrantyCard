@@ -1,5 +1,6 @@
 {
   "en":{
+    "tag":"en",
     "app_name":"Online Warranty",
     "titles":{
       "register_title":"Register"      
@@ -14,6 +15,7 @@
     }
   },
   "cn":{
+    "tag":"cn",
     "app_name":"保修在线",
     "registerPage":{
       "register_title":"注册新帐户",
@@ -77,12 +79,47 @@
       "KY":"设备型号",
       "note":"备注",
       "invoice":"上传发票*",
+      "click_to_upload":"点击上传发票照片",
       "submit":"提交",
       "click_to_register":", 点击注册",
       "success":"创建成功",
       "fail":"创建失败"
 
 
+
+    },
+    "viewCard":{
+      "page_title":"查看保修卡",
+      "card_number":"保修卡号:",
+      "warranty_date":"保修期：",
+      "valid_status":"在保",
+      "invalid_status":"过保",
+      "appliance_name":"设备名称",
+      "invoice_click_to_zoom":"发票，点击查看大图",
+      "SN":"设备序列号",
+      "KY":"设备型号",
+      "warranty_title":"保修卡详情",
+      "appliance_title":"商品信息",
+      "records_title":"服务记录",
+      "apply_for_service":"申请保修",
+      "pay_for_service":"申请付费维修",
+      "isopen":"服务发起",
+      "isclosed":"服务关闭",
+      "click_to_view_instructions":"点击查看使用说明"
+
+
+    },
+    "personalInfo":{
+      "title":"个人信息维护",
+      "name_label":"姓名：",
+      "email_label":"电子邮箱：",
+      "telephone_label":"电话：",
+      "address_label":"家庭住址：",
+      "goto_gravatar":"访问gravatar.com更改头像",
+      "btn_edit":"修改",
+      "btn_save":"保存",
+      "btn_cancel":"取消修改",
+      "no_value":"空"
 
     }
   }

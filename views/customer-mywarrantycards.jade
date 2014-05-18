@@ -4,7 +4,7 @@ block scripts
   script(type='text/javascript',src='/js/mywarrantycard.js')
 block content
   #userName.hidden= user?user.name:null
-  #page.container
+  .container.wrapper
     #cards
       each card in cards
         if(card.status == 'ACTIVE')
@@ -22,7 +22,12 @@ mixin makeCard(card,hidden)
   //- - var card = $.parseJSON(card)
   .card(class='#{hidden}')
     .row.card-general
-      a.col-md-3.thumbnail
+      //- .lightbox.hide-big-pic.fade(id="#{card.number?card.number:''}"+'-big-pic',role='dialog',aria-hidden='true',tabindex="-1")
+      //-   .lightbox-content
+      //-     img(src="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
+
+      a.col-md-3.thumbnail.appliance-pic-magnific(href="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
+        //(data-toggle='lightbox',href="#"+"#{card.number?card.number:''}"+'-big-pic')
         //-(href="#{card?card.appliance?card.appliance.detailPath:null:null}")
         img.appliance-pic(src="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
       .card-body.col-md-9

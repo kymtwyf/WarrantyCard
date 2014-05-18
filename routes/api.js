@@ -1,6 +1,7 @@
 exports.User = require('./api-user');
 exports.WarrantyCard = require('./api-warrantycard');
 exports.Appliance = require('./api-appliance');
+exports.ServiceRecord = require('./api-servicerecord');
 var config = require('../config/config.json');
 exports.test = function(req,res){
   console.log(JSON.stringify(config));

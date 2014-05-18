@@ -1,6 +1,8 @@
 var util = require('util');
 var http = require('http');
 var when = require('when');
+var crypto = require('crypto');
+
 var querystring = require('querystring');
 var _ = require('underscore');
 var apiWarrantyCard = require('./api').WarrantyCard;
@@ -102,5 +104,15 @@ exports.myappliances = function(req,res){
       locale:config.cn,
       cards:values
     })
+  })
+}
+
+exports.myprofile = function(req,res){
+  var userId = req.session.user?req.session.user._id:req.param("id");
+  var lang = req.app.get('locale');
+  console.log('the language for the app is '+lang);
+  res.render('personal-info',{
+    locale:config[lang],
+    md5:function(str){return crypto.createHash('md5').update(str).digest('hex')}
   })
 }

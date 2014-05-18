@@ -48,6 +48,11 @@ module.exports = function(app){
   app.post('/api/warrantycard/insertMessage',api.WarrantyCard.insertMessage);
   app.post('/api/warrantycard/:userId',api.WarrantyCard.searchAllByUser);
 
+  app.post('/api/servicerecord/create',api.ServiceRecord.create);
+  app.post('/api/servicerecord/search',api.ServiceRecord.search);
+  app.post('/api/servicerecord/insertMessage',api.ServiceRecord.insertMessage);
+  app.post('/api/servicerecord/closeRecord',api.ServiceRecord.closeRecord);
+
 
   app.post('/api/register',api.User.register);
   app.post('/api/signin',api.User.login);
@@ -56,14 +61,33 @@ module.exports = function(app){
   app.post('/api/user/searchSellers',api.User.searchSellers);
   app.post('/api/user/searchCustomers',api.User.searchCustomers);
 
+  app.post('/api/switchLanguage',function(req,res){
+    var supportedLangs = ['en','cn'];
+    var lang = req.param('lang');
+    console.log('the language to switch '+ lang);
+    if(supportedLangs.indexOf(lang) != -1){
+      app.set('locale',lang);
+      res.send({
+        status:"success",
+        language:lang
+      })
+    }else{
+      res.send({
+        status:"error",
+        reason:"not supported language "+lang
+      })
+    }
+  })
 
   //views
   app.get('/',preset,desktop.customer.homepage);
   app.get('/:id/home',preset,filter,desktop.customer.homepage);
   app.get('/:id/mywarrantycards',preset,filter,desktop.customer.get);
-  app.get('/:id/warrantycard/:cardId',preset,filter,desktop.customer.get);
+  app.get('/warrantycard/:cardId',preset,filter,desktop.common.viewcard);
+  app.get('/:id/mywarrantycards/:cardId',preset,filter,desktop.common.viewcard);
 
   app.get('/:id/myappliances',preset,filter,desktop.customer.myappliances);
+  app.get('/:id/myprofile',preset,filter,desktop.customer.myprofile);
   app.get('/managecards/create',preset,filter,desktop.salesman.createCard);  
   app.get('/managecards',preset,filter,desktop.salesman.managecards);
   

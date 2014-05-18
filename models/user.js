@@ -26,6 +26,10 @@ schema.virtual('password').set(function (password) {
   this.password_md5 = schema.statics.md5(password);
 });
 
+schema.pre('save',function(next){
+  this.email = this.email.toLowerCase();
+  next();
+})
 schema.statics.findOneByNamePassword = function (name, password) {
   var password_md5 = schema.statics.md5(password);
   return this.findOne({name: name, password_md5: password_md5});

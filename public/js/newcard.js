@@ -12,7 +12,9 @@ $(document).on('ready',function(){
     }
     if(!regex.test(email)){
       alertText.removeClass('hidden');
-      alertText.text("invalid email")
+      alertText.text("invalid email");
+      alertText.next().attr("value","");
+
       return ;
     }else{
       $(this).closest(".form-group").find(".alert-text").text("")
@@ -97,18 +99,27 @@ $(document).on('ready',function(){
       processData: false,
       success: function (data) {
         // alert(returndata);
+        data = JSON.parse(data);
         if(data.status == 'success'){
+          console.log("success");
           $('input').val('');
           $('input.hidden').attr('value','');
-          $('.alert-text').addClass('hidden');
+          // var control = $('input[type="file"]');
+          // control.replaceWith( control = control.clone( true ) )
+          // $('.alert-text').addClass('hidden');
 
-          $('.alert-result.alert-success').removeClass('hidden');
+          // $('.alert-result.alert-success').removeClass('hidden');
+          $("#message-box>.alert").trigger("showMessage",["successfully created warranty card!!!","alert-success",3000]);
         }else{          
-          alert(data);
-          $('.alert-result.alert-danger').removeClass('hidden');
+          console.log("fail");
+          // alert(data);
+          // $('.alert-result.alert-danger').removeClass('hidden');
+          $("#message-box>.alert").trigger("showMessage",["error "+JSON.stringify(data),"alert-danger",3000]);
 
         }
       }
   });
   })
+
+  $('input[type=file]').bootstrapFileInput();
 })

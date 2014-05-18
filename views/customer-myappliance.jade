@@ -2,7 +2,7 @@ extends layout
 block scripts
   link(rel='stylesheet',href='/css/myappliances.css')
 block content
-  .container#page
+  .container#page.wrapper
     .appliance-list
       each card in cards
         +makeAppliance(card)

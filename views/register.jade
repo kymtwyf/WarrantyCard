@@ -3,7 +3,7 @@ block scripts
   script(type='text/javascript',src='/js/register.js')
   link(rel='stylesheet', href='/css/register-login.css')
 block content
-  .container
+  .container.wrapper
     form.form-register.form-horizontal(action='/api/register')
       h2.form-register-heading.text-center
         |#{locale.registerPage.register_title} 

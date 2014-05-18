@@ -5,6 +5,7 @@ html
   body
   -var user = session?session.user?session.user:null:null
   #header
+    .language.hidden= locale.tag
     .navbar-wrapper
       .container
         .navbar-header
@@ -37,7 +38,7 @@ html
             if user 
               ul.nav.navbar-nav.navbar-right
                 li
-                  a(href='#myprofile')= locale.tags.Header_MyProfile   
+                  a(href='/'+user._id+'/myprofile')= locale.tags.Header_MyProfile   
                     span.glyphicon.glyphicon-user
                 li
                   a(href='/logout')= locale.tags.Header_logout
@@ -64,6 +65,8 @@ html
                 //- a.btn-primary(href='/register')= locale.tags.Header_Register
 
 
-
+  #message-box.row.center.text-center
+    .alert.hidden
+       button(type="button",class="close",data-dismiss="alert",aria-hidden="true")&times;
   block content 
 include include/footer

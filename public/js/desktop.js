@@ -1,4 +1,70 @@
+var WarrantyOnline = {};
 
+(function(WO){
+  WO.replaceLanguage = function(language){
+    WO.lang = language;
+  }
+})(WarrantyOnline);
+
+
+(function($){
+  $(document).on('ready',function(){
+    // $.cookie.json = true;
+    /*
+      for messageBox Display
+    */
+    var messageBox = $('#message-box>.alert');
+    var allAlertTypes = 'alert-success alert-info alert-warning alert-danger';
+    messageBox.bind('showMessage',function(event,content,alertType,time){
+      console.log(arguments);
+      if(content && content.trim()!=''){
+        if(messageBox.hasClass('hidden')){
+          messageBox.removeClass('hidden');
+        }else{
+          messageBox.slideDown('fast');
+        }
+        if(alertType){
+          messageBox.removeClass(allAlertTypes);
+          messageBox.addClass(alertType);
+        }
+        messageBox.text(content);
+        setTimeout(function(){
+          messageBox.slideUp();
+
+        },time?time:1000)
+      }else{
+        console.log('not available message to show')
+      }
+      console.log('entered message');
+    })
+    /*
+      Config the Local Language Tags
+    */
+    var urlForConfig = "/config/config.json";
+    var langTag = $('.language.hidden').text();
+    var localLanguage = localStorage['language'];
+    // if(!localLanguage|| !JSON.parse(localLanguage)[langTag]){
+      $.get(urlForConfig, function(result){
+        console.log("requesting the languageagain");
+        console.log(result);
+        localStorage['language']= JSON.stringify(result);
+        // $.cookie("language",JSON.stringify(result.cn),{path:"/"});
+        WarrantyOnline.replaceLanguage(result[langTag]);
+      });
+    // }
+
+
+    
+    
+
+   
+  })
+// setTimeout(function(){
+
+//   $('#message-box>.alert').trigger('showMessage',["hello Message","alert-success"])
+// },2000);
+
+})(jQuery)
 // $(document).on('submit','#header_signin_form',function(event){
 //   event.preventDefault();
 //   console.log('onsubmit');
@@ -76,16 +142,16 @@ function clearAllActiveNav(){
       $(element).parent().removeClass("active");
   });
 }
-$(document).ready(function(){
-  console.log("desktop onready");
-  var href = window.location.href;
-  // clearAllActiveNav();
-  if(href.indexOf('mywarrantycards') != -1){
-    $(".nav-pills a[href$='mywarrantycards']").parent().addClass("active");
-  }
+// $(document).ready(function(){
+//   console.log("desktop onready");
+//   var href = window.location.href;
+//   // clearAllActiveNav();
+//   if(href.indexOf('mywarrantycards') != -1){
+//     $(".nav-pills a[href$='mywarrantycards']").parent().addClass("active");
+//   }
 
-  if(href.indexOf('managecards') != -1){
-    $(".nav-pills a[href$='managecards']").parent().addClass("active");
-  }
+//   if(href.indexOf('managecards') != -1){
+//     $(".nav-pills a[href$='managecards']").parent().addClass("active");
+//   }
   
-})
+// })

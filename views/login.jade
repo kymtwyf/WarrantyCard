@@ -2,7 +2,7 @@ extends layout
 block scripts
   link(rel='stylesheet',href="/css/register-login.css")
 block content
-  .container
+  .container.wrapper
     form#form-signin(action='/api/signin',method='post')
       h2.form-signin.heading.text-center= locale.signinPage.signin_title
       input.form-control(name='email',placeholder='#{locale.signinPage.email_placeholder}')

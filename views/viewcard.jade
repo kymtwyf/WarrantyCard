@@ -1,0 +1,58 @@
+extends layout
+block scripts
+  script(type='text/javascript',src='/js/viewcard.js')
+
+  link(rel='stylesheet',href='/css/viewcard.css')
+
+block content
+  #wraper.container.wrapper
+    h3.page-title.text-center= locale.viewCard.page_title
+
+    .warranty-detail.row
+      .warranty-detail-title= locale.viewCard.warranty_title
+      if user.role=='customer'  
+        if card.status == 'ACTIVE'
+          span.btn.btn-default.apply-for-service.pull-right= locale.viewCard.apply_for_service
+        else 
+          span.btn.btn-default.pay-for-service.pull-right= local.viewCard.pay_for_service
+      h4.warranty-number= locale.viewCard.card_number+card._id
+      span #{locale.viewCard.warranty_date}
+      span.date.date-from= (card.createTime?card.createTime.toLocaleDateString():"") + " ~ "
+      span.date.date-to= card.expireTime?card.expireTime.toLocaleDateString():""
+      if card.status=='ACTIVE'
+        .warranty-status= locale.viewCard.valid_status
+      else 
+        .warranty-status= locale.viewCard.invalid_status
+
+    .appliance-detail.row
+      .appliance-detail-title= locale.viewCard.appliance_title
+      .col-md-3.appliance-head
+        h4.appliance-name.text-center= appliance.name 
+        a.thumbnail.appliance-pic(href='#{appliance.detailPath}',target='_blank')
+          img(src='#{appliance.picPath}',title='#{locale.viewCard.click_to_view_instructions}')
+      .invoice-head.pull-right
+        .invoice-info.text-center
+        a.invoice-pic.thumbnail.pull-right(href='#{card.invoicePic}')    
+          img.invoice-pic(src='#{card.invoicePic}',title= "#{locale.viewCard.invoice_click_to_zoom}")
+    
+    .service-records.row
+      .warranty-detail-title= locale.viewCard.records_title
+      //- h4.records-title
+      each record in records
+        +makeRecord(record)
+      //- |#{records[0].message[0].user.userName}
+      //- |records
+      //- |card
+
+mixin makeRecord(record)
+  .row.record
+    .record-status
+      if record.isopen
+        |#{locale.viewCard.isopen}
+      else
+        |#{locale.viewCard.isclosed}
+        .record-rating= record.rating
+    each message in record.message  
+      h4.name.col-md-offset-1= message.user.userName?message.user.userName:message.user.name+":"
+      span.message-time.pull-right= message._id.getTimestamp().toLocaleDateString()
+      .message.col-md-offset-1= message.message

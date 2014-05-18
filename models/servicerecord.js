@@ -8,6 +8,18 @@ var schema = new database.Schema({
   rating:{ type: Number, min: 0, max: 5}
 
 })
+
+// schema.statics.findByWarrantyId = function(warrantyId){
+//   var ret = when.defer();
+//   this.find({warrantyId:warrantyId},function(err,records){
+//     if(err){
+//       ret.reject();
+//     }else{
+//       ret.resolve(records);
+//     }
+//   })
+//   return ret.promise;
+// }
 var saveCallBack = function(err,record){
   var ret = when.defer();
   if(err){
@@ -20,8 +32,13 @@ var saveCallBack = function(err,record){
 schema.methods.insertMessage = function(user,message){
   var ret = when.defer();
   var obj = {
-    user:user,
-    message:message
+    user:{
+      _id:user._id,
+      name:user.name,
+      email:user.email
+    },
+    message:message,
+    _id:new database.mongoose.Types.ObjectId()
   }
   this.message.push(obj);
   this.save(function(err,record){

@@ -1,0 +1,24 @@
+.personalinfo .person-image{
+  display:inline-block;
+  margin-right: 5%;
+}
+.personalinfo .detail{
+  margin-top: 20px;  
+  margin-bottom: 20px;  
+}
+label.control-label{
+  width: 80px;
+}
+.text-detail{
+  width:auto;
+}
+
+a.btn {
+  margin:10px;
+}
+form{
+  font-size: 15px;
+}
+.editable-input{
+  margin-left: 10px;
+}
