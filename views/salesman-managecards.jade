@@ -2,10 +2,20 @@ extends layout
 
 block content  
   .container.wrapper
-    #search.container
+    #search.container.row
       .input-group.col-md-4.pull-right
+        .input-group-btn
+          button.btn.btn-default.dropdown-toggle(data-toggle='dropdown')= locale.manageCards.search_dropdown_card
+            span.caret
+          ul.dropdown-menu
+            li
+              a= locale.manageCards.search_dropdown_card
+            li
+              a= locale.manageCards.search_dropdown_appliance
+            li
+              a= locale.manageCards.search_dropdown_customer                      
         input.form-control(type='text',placeholder='Search')
-        span.input-group-btn
+        .input-group-btn
           button.btn.btn-default#searchcard
             span.glyphicon.glyphicon-search
     #messages.container

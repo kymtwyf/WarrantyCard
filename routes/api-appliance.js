@@ -48,3 +48,24 @@ exports.search = function(req,res){
     }
   })
 }
+
+exports.update = function(req,res){
+  console.log('the update request :' + util.inspect(req.body));
+  var applianceId = req.body.applianceId;
+  var conditions = JSON.parse(req.body.conditions);
+  var update = JSON.parse(req.body.update);
+  // console.log('the conditions is ');
+  // console.log(conditions);
+  // console.log('the update is ');
+  // console.log(update);
+    Appliance.find(conditions,function(err,app){
+      if(err){
+        res.send({
+          status:"error",
+          detail:err
+        })
+      }else{
+
+      }
+    })
+}

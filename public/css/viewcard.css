@@ -31,3 +31,10 @@
   top:-32px;
   left:20px;
 }
+#service-type,
+#service-message{
+  width:70%;
+}
+.modal-body .row{
+  padding-top: 20px
+}

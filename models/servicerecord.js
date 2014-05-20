@@ -3,10 +3,13 @@ var when = require('when');
 var util = require('util');
 var schema = new database.Schema({
   warrantyId:database.ObjectId,
+  openReason:String,//service open reason "consult/repair/return"
   message:[],
   isopen:{type:Boolean,default:true},
-  rating:{ type: Number, min: 0, max: 5}
-
+  rating:{ type: Number, min: 0, max: 5},
+  closeTime:Date,
+  closer:database.ObjectId,
+  closeReason:String
 })
 
 // schema.statics.findByWarrantyId = function(warrantyId){
@@ -40,6 +43,7 @@ schema.methods.insertMessage = function(user,message){
     message:message,
     _id:new database.mongoose.Types.ObjectId()
   }
+  console.log('insertiong')
   this.message.push(obj);
   this.save(function(err,record){
     ret.resolve(saveCallBack(err,record));
@@ -61,9 +65,11 @@ schema.methods.setRating = function(number){
   return ret.promise;
 }
 
-schema.methods.closeRecord = function(){
+schema.methods.closeRecord = function(reason){
   var ret = when.defer();
   this.isopen = false;
+  this.closeReason = reason;
+  this.closeTime = new Date();
   this.save(function(err,record){
     ret.resolve(saveCallBack(err,record));
   });  

@@ -43,7 +43,27 @@ block content
       //- |#{records[0].message[0].user.userName}
       //- |records
       //- |card
-
+    .modal.fade#createRecordModal(role='dialog',aria-labelledby="dialog-title",aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button',data-dismiss='modal',aria-hidden='true')&times;
+            h4.modal-title#dialog-title= locale.viewCard.modaltitle_apply_for_service
+          .modal-body            
+            h5.warranty-number-text= locale.viewCard.card_number
+              span.warranty-number DEF
+            .row
+              span.col-md-3.service-type-title= locale.viewCard.service_type_title
+              select#service-type.form-control
+                option(value='consult')= locale.viewCard.service_type_consult
+                option(value='repair')= locale.viewCard.service_type_repair
+                option(value='return')= locale.viewCard.service_type_return
+            .row
+              span.col-md-3.service-message-title= locale.viewCard.service_message_title
+              textarea#service-message.form-control(rows='4')
+          .modal-footer
+            a.btn.btn-default(data-dismiss='modal')= locale.viewCard.btn_cancel
+            a.btn.btn-primary#btn-submit-service= locale.viewCard.btn_submit
 mixin makeRecord(record)
   .row.record
     .record-status
@@ -56,3 +76,6 @@ mixin makeRecord(record)
       h4.name.col-md-offset-1= message.user.userName?message.user.userName:message.user.name+":"
       span.message-time.pull-right= message._id.getTimestamp().toLocaleDateString()
       .message.col-md-offset-1= message.message
+
+
+

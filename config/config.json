@@ -79,11 +79,15 @@
       "KY":"设备型号",
       "note":"备注",
       "invoice":"上传发票*",
+      "titel_invoice_preview":"发票预览",
       "click_to_upload":"点击上传发票照片",
       "submit":"提交",
       "click_to_register":", 点击注册",
       "success":"创建成功",
-      "fail":"创建失败"
+      "fail":"创建失败",
+      "search_dropdown_card":"保修卡",
+      "search_dropdown_appliance":"设备",
+      "search_dropdown_customer":"顾客"
 
 
 
@@ -101,11 +105,20 @@
       "warranty_title":"保修卡详情",
       "appliance_title":"商品信息",
       "records_title":"服务记录",
-      "apply_for_service":"申请保修",
+      "apply_for_service":"申请服务",
       "pay_for_service":"申请付费维修",
       "isopen":"服务发起",
       "isclosed":"服务关闭",
-      "click_to_view_instructions":"点击查看使用说明"
+      "click_to_view_instructions":"点击查看使用说明",
+      "modaltitle_apply_for_service":"申请服务",
+      "btn_cancel":"取消",
+      "btn_submit":"提交",
+      "service_type_title":"服务类型：",
+      "service_type_consult":"咨询",
+      "service_type_repair":"维修",
+      "service_type_return":"退换",
+      "service_message_title":"留言"
+
 
 
     },

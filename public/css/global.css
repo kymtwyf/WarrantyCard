@@ -53,9 +53,13 @@ footer {
   margin-top:20px;
 }
 
-  #message-box.row{
-    width:50%;
-  }
+#message-box.row{
+  width:50%;
+}
+#message-box>.alert{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 /*.center-row{
   display:table;
 }

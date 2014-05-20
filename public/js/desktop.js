@@ -1,6 +1,9 @@
-var WarrantyOnline = {};
+var WarrantyOnline = {
+  lang:null
+};
 
 (function(WO){
+
   WO.replaceLanguage = function(language){
     WO.lang = language;
   }
@@ -42,8 +45,11 @@ var WarrantyOnline = {};
     */
     var urlForConfig = "/config/config.json";
     var langTag = $('.language.hidden').text();
+    console.log('language tag '+langTag);
     var localLanguage = localStorage['language'];
-    // if(!localLanguage|| !JSON.parse(localLanguage)[langTag]){
+    console.log(!localLanguage);
+    console.log(JSON.parse(localLanguage)[langTag]);
+    if(!localLanguage|| !JSON.parse(localLanguage)[langTag]){
       $.get(urlForConfig, function(result){
         console.log("requesting the languageagain");
         console.log(result);
@@ -51,8 +57,12 @@ var WarrantyOnline = {};
         // $.cookie("language",JSON.stringify(result.cn),{path:"/"});
         WarrantyOnline.replaceLanguage(result[langTag]);
       });
-    // }
-
+    }else{
+      // if(!WarrantyOnline.lang && localStorage['language']){
+        console.log('replacing language ');
+        WarrantyOnline.replaceLanguage(JSON.parse(localLanguage)[langTag] );
+      // }
+    }
 
     
     
@@ -61,7 +71,7 @@ var WarrantyOnline = {};
   })
 // setTimeout(function(){
 
-//   $('#message-box>.alert').trigger('showMessage',["hello Message","alert-success"])
+//   $('#message-box>.alert').trigger('showMessage',["消息","alert-success",10000000])
 // },2000);
 
 })(jQuery)

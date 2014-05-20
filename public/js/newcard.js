@@ -89,6 +89,16 @@ $(document).on('ready',function(){
       return;
     }
     var url = "/api/warrantycard/create";
+
+    var resetFileInputAndPreview = function(){
+      var fileInput = $('input[type="file"]');
+      var fileName = WarrantyOnline.lang.manageCards.click_to_upload;
+      fileInput.siblings('span').html(fileName);
+      fileInput.attr('title', fileName);
+      $('#preview').attr('src','/images/no-image.jpg');
+
+    }
+
     $.ajax({
       url: url,
       type: 'POST',
@@ -102,7 +112,9 @@ $(document).on('ready',function(){
         data = JSON.parse(data);
         if(data.status == 'success'){
           console.log("success");
-          $('input').val('');
+          $('input').val(''); 
+          resetFileInputAndPreview();
+
           $('input.hidden').attr('value','');
           // var control = $('input[type="file"]');
           // control.replaceWith( control = control.clone( true ) )
@@ -112,6 +124,9 @@ $(document).on('ready',function(){
           $("#message-box>.alert").trigger("showMessage",["successfully created warranty card!!!","alert-success",3000]);
         }else{          
           console.log("fail");
+          $('input').val(''); 
+          resetFileInputAndPreview();
+
           // alert(data);
           // $('.alert-result.alert-danger').removeClass('hidden');
           $("#message-box>.alert").trigger("showMessage",["error "+JSON.stringify(data),"alert-danger",3000]);
@@ -122,4 +137,20 @@ $(document).on('ready',function(){
   })
 
   $('input[type=file]').bootstrapFileInput();
+  function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("input[type=file]").on('change',function(){
+      readURL(this);
+  });
 })
