@@ -1,23 +1,49 @@
 var Appliance = require('./appliance');
 var User = require('./user');
 var WarrantyCard = require('./warrantycard');
+var SalesRecord = require('../models/salesrecord');
 
 var when = require('when');
-
+var _ = require('underscore');
+var moment = require('moment');
+var util = require('util');
 var appliance = when.defer();
 var customer = when.defer();
 var salesman = when.defer();
 
-new Appliance({
-  name:"testn SONY Laptop",
-  SN:"ABFADS",
-  KY:"QET",
-  detailPath:"http://detail.zol.com.cn/lcd/index356359.shtml",
 
-  price:"6500",
-  discount:"0.8",
-  status:"SOLD"
-}).save();
+for(var index = 0 ; index < 1 ; index++){
+
+  new Appliance({
+    name:_.uniqueId("testn SONY Laptop_"),
+    SN:_.uniqueId("ABC_"),
+    KY:_.uniqueId("QET_"),
+    detailPath:"http://detail.zol.com.cn/lcd/index356359.shtml",
+
+    price:"6500"+_.random(1000),
+    discount:0.8+(_.random(20))/100,
+    status:"SOLD"
+  }).save(function(err,app){
+    if(!err){
+      var myDate = new Date();
+      new SalesRecord({
+        applianceId:app._id,
+        soldPrice:app.price,
+        soldTime:myDate.setHours(myDate.getHours()+_.random(1000)),
+        seller:"5357cee2928a05e027323779"
+      }).save(function(err,record){
+        if(err){
+          console.log('error when creating salesrecord');
+        }else{
+          console.log("finished created ");
+        }
+      })
+    }else{
+      console.log('error when creating appliance'+util.inspect(err));
+    }
+  });
+}
+
 // new Appliance({
 //   name:"SONY Laptop",
 //   SN:"VAIOEP1DASG13",

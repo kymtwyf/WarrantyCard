@@ -47,8 +47,8 @@ var WarrantyOnline = {
     var langTag = $('.language.hidden').text();
     console.log('language tag '+langTag);
     var localLanguage = localStorage['language'];
-    console.log(!localLanguage);
-    console.log(JSON.parse(localLanguage)[langTag]);
+    // console.log(!localLanguage);
+    // console.log(JSON.parse(localLanguage)[langTag]);
     if(!localLanguage|| !JSON.parse(localLanguage)[langTag]){
       $.get(urlForConfig, function(result){
         console.log("requesting the languageagain");

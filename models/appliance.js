@@ -12,7 +12,7 @@ var schema = new database.Schema({
   discount:{type:Number,default:1.0},
 
   status:{type:String, default:"FORSALE",enum:allStatus},//Status :FORSALE | DELETED | SOLD
-  soldTime:{type:Date, default: Date.now},// the Date of selling
+  // soldTime:{type:Date, default: Date.now},// the Date of selling
   KPDs:[]//主关键部件的_id
 
 })

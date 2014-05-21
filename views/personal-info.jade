@@ -24,7 +24,7 @@ block content
         .person-address.detail.form-group
           label.control-label.person-address-label=locale.personalInfo.address_label
           a.person-address(data-name='address',data-type='text')= user.address
-        .edit.center
-          a.btn.btn-primary.btn-edit.pull-right= locale.personalInfo.btn_edit
-          a.btn.btn-success.btn-save.hidden.pull-right= locale.personalInfo.btn_save
-          a.btn.btn-default.btn-cancel.hidden.pull-right= locale.personalInfo.btn_cancel
+        .edit.pull-left
+          a.btn.btn-primary.btn-edit= locale.personalInfo.btn_edit
+          a.btn.btn-success.btn-save.hidden= locale.personalInfo.btn_save
+          a.btn.btn-default.btn-cancel.hidden= locale.personalInfo.btn_cancel

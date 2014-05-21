@@ -26,12 +26,16 @@ block content
 
     .appliance-detail.row
       .appliance-detail-title= locale.viewCard.appliance_title
-      .col-md-3.appliance-head
-        h4.appliance-name.text-center= appliance.name 
-        a.thumbnail.appliance-pic(href='#{appliance.detailPath}',target='_blank')
+      .col-md-2.appliance-head
+        h5.appliance-name.text-center= appliance.name 
+        a.thumbnail.appliance-pic.center(href='#{appliance.detailPath}',target='_blank')
           img(src='#{appliance.picPath}',title='#{locale.viewCard.click_to_view_instructions}')
+      .col-md-offset-1.col-md-3.appliance-description
+        .SN= locale.viewCard.SN+ appliance.SN
+        .KY= locale.viewCard.KY+ appliance.KY
+        a.btn.btn-default.detail(href='#{appliance.detailPath}')= locale.viewCard.click_to_view_instructions
       .invoice-head.pull-right
-        .invoice-info.text-center
+        h5.invoice-info.text-center= locale.viewCard.invoice_click_to_zoom
         a.invoice-pic.thumbnail.pull-right(href='#{card.invoicePic}')    
           img.invoice-pic(src='#{card.invoicePic}',title= "#{locale.viewCard.invoice_click_to_zoom}")
     
@@ -65,17 +69,17 @@ block content
             a.btn.btn-default(data-dismiss='modal')= locale.viewCard.btn_cancel
             a.btn.btn-primary#btn-submit-service= locale.viewCard.btn_submit
 mixin makeRecord(record)
-  .row.record
+  .record
     .record-status
       if record.isopen
-        |#{locale.viewCard.isopen}
+        .record-open= locale.viewCard.isopen
       else
-        |#{locale.viewCard.isclosed}
+        .record-close= locale.viewCard.isclosed
         .record-rating= record.rating
     each message in record.message  
-      h4.name.col-md-offset-1= message.user.userName?message.user.userName:message.user.name+":"
+      h4.name= message.user.userName?message.user.userName:message.user.name+":"
       span.message-time.pull-right= message._id.getTimestamp().toLocaleDateString()
-      .message.col-md-offset-1= message.message
+      .message.col-md-offset-1= message.message.message
 
 
 

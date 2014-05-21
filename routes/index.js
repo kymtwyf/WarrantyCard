@@ -53,6 +53,11 @@ module.exports = function(app){
   app.post('/api/servicerecord/insertMessage',api.ServiceRecord.insertMessage);
   app.post('/api/servicerecord/closeRecord',api.ServiceRecord.closeRecord);
 
+  app.post('/api/salesrecord/create',api.SalesRecord.create);
+  app.post('/api/salesrecord/search',api.SalesRecord.search);
+
+  app.post('/api/statistics/count',api.Statistics.count);
+
 
   app.post('/api/register',api.User.register);
   app.post('/api/signin',api.User.login);
@@ -90,6 +95,7 @@ module.exports = function(app){
   app.get('/:id/myprofile',preset,filter,desktop.customer.myprofile);
   app.get('/managecards/create',preset,filter,desktop.salesman.createCard);  
   app.get('/managecards',preset,filter,desktop.salesman.managecards);
+  app.get('/statistics',preset,filter,desktop.salesman.statistics);
   
   app.get('/login',preset,desktop.user.login);
   app.get('/logout',preset,api.User.logout);

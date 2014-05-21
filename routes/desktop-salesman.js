@@ -22,3 +22,10 @@ exports.managecards = function(req,res){
     locale:config[lang]
   })
 }
+
+exports.statistics = function(req,res){
+  var lang = req.app.get('locale');
+  res.render('salesman-statistics',{
+    locale:config[lang]
+  })
+}

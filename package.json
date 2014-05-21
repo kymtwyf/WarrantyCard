@@ -28,6 +28,7 @@
     "when": "3.x",
     "jade": "1.x",
     "redis": "~0.10.1",
-    "connect-redis": "~1.4.7"
+    "connect-redis": "~1.4.7",
+    "moment": "~2.6.0"
   }
 }

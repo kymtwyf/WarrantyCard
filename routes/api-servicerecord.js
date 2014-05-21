@@ -7,7 +7,9 @@ exports.create = function(req,res){
   var msg = req.body.message;
   var user = req.session.user?req.session.user:req.body.user;
   var message = {};
-
+  if(!warrantyId || !openReason || !msg || !user){
+    ERROR_HELPER(req,res,"empty warrantyId Or openReason Or message Or you are not log in")
+  }
   console.log('[ServiceRecord create]the warrantyId is '+warrantyId) ;
 
   new ServiceRecord({

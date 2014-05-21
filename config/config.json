@@ -49,7 +49,8 @@
       "Header_Signin":"登陆",
       "Header_Register":"立即注册！",
       "Header_Salesman_WarrantyCards":"保修卡管理",
-      "Header_Salesman_Appliances":"产品管理"
+      "Header_Salesman_Appliances":"产品管理",
+      "Header_Statistic":"统计信息"
 
 
     },
@@ -107,7 +108,7 @@
       "records_title":"服务记录",
       "apply_for_service":"申请服务",
       "pay_for_service":"申请付费维修",
-      "isopen":"服务发起",
+      "isopen":"服务发起中",
       "isclosed":"服务关闭",
       "click_to_view_instructions":"点击查看使用说明",
       "modaltitle_apply_for_service":"申请服务",

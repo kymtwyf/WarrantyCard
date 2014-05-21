@@ -1,0 +1,32 @@
+extends layout
+block scripts
+  script(type='text/javascript',src='/amcharts/amcharts.js')
+  script(type='text/javascript',src='/amcharts/serial.js')
+
+  script(type='text/javascript',src='/js/statistics.js')
+
+  // script(type='text/javascript',src='/js/statistics.js')
+
+  // script(type='text/javascript')
+    
+
+
+  link(rel='stylesheet',href='/css/statistics.css')
+
+block content
+  .container.wrapper
+    |hello world
+    //- #content(style='width:1100px;height:200px;')
+    .tabs
+      ul.nav.nav-tabs
+        li.active
+          a(href='#table',data-toggle='tab')表格
+        li
+          a(href='#line-chart',data-toggle='tab')折线图
+        li
+          a(href='#pie-chart',data-toggle='tab')饼图
+      .tab-content
+        .tab-pane.fade.active.in#table
+           #content(style='width:1100px;height:200px;')
+        .tab-pane.fade#line-chart
+        .tab-pane.fade#pie-chart

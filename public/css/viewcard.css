@@ -1,5 +1,6 @@
-.appliance-detail a.invoice-pic{
-  max-width: 50px;
+.appliance-detail a.invoice-pic,
+.appliance-detail a.appliance-pic{
+  max-width: 150px;
 }
 .appliance-head,
 .invoice-head{
