@@ -71,7 +71,7 @@ module.exports = function(app){
     var lang = req.param('lang');
     console.log('the language to switch '+ lang);
     if(supportedLangs.indexOf(lang) != -1){
-      app.set('locale',lang);
+      req.app.set('locale',lang);
       res.send({
         status:"success",
         language:lang

@@ -15,18 +15,38 @@ block scripts
 
 block content
   .container.wrapper
-    |hello world
+    h3.title.text-center= locale.statistics.title
     //- #content(style='width:1100px;height:200px;')
+    .row.selections
+      .col-md-1
+        input(type='radio',name='countType',value='soldnumber')
+        label(for='soldnumber')= locale.statistics.countType_salesnumber
+      .col-md-1
+        input(type='radio',name='countType',value='soldmoney')
+        label(for='soldmoney')= locale.statistics.countType_salesmoney  
+      .col-md-2
+        input(type='radio',name='countType',value='servicenumber')
+        label(for='servicenumber')= locale.statistics.countType_servicenumber   
+      .col-md-1.pull-right
+        btn#button-count.btn.btn-primary.btn-sm= locale.statistics.btn_count  
+      .col-md-3.pull-right.input-group
+        span.input-group-addon.glyphicon.glyphicon-calendar
+        input.form-control(type='text',name='daterange')
     .tabs
-      ul.nav.nav-tabs
-        li.active
+      ul.nav.nav-tabs#show-type
+        li.active(value='showchart')
+          a(href='#chart',data-toggle='tab')图表
+        li(value='showtable')
           a(href='#table',data-toggle='tab')表格
-        li
-          a(href='#line-chart',data-toggle='tab')折线图
-        li
-          a(href='#pie-chart',data-toggle='tab')饼图
       .tab-content
-        .tab-pane.fade.active.in#table
-           #content(style='width:1100px;height:200px;')
-        .tab-pane.fade#line-chart
-        .tab-pane.fade#pie-chart
+        .tab-pane.fade.active.in#chart
+           #chart-content
+        .tab-pane.fade#table
+           table.table#table-content
+            tr
+              td abc
+              td def
+            tr 
+              td atcgsd
+              td acgbab
+

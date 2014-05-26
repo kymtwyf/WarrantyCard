@@ -1,13 +1,20 @@
 extends layout
 block scripts
+  script(type='text/javascript',src='/js/register-login.js')
   link(rel='stylesheet',href="/css/register-login.css")
 block content
   .container.wrapper
-    form#form-signin(action='/api/signin',method='post')
+    form#form-signin
       h2.form-signin.heading.text-center= locale.signinPage.signin_title
-      input.form-control(name='email',placeholder='#{locale.signinPage.email_placeholder}')
-      input.form-control(name='password',type='password',placeholder='#{locale.signinPage.password_placeholder}')
+      .input-group
+        span.input-group-addon
+          i.glyphicon.glyphicon-user
+        input.form-control(name='email',placeholder='#{locale.signinPage.email_placeholder}')
+      .input-group
+        span.input-group-addon
+          i.glyphicon.glyphicon-lock
+        input.form-control(name='password',type='password',placeholder='#{locale.signinPage.password_placeholder}')
       
-      input.hidden(name='redirect',value='/')
-      button#signin-submit.btn.btn-primary.btn-block(type='submit')= locale.signinPage.login_button
+      //- input.hidden(name='redirect',value='/')
+      button#signin-submit.btn.btn-primary.btn-block(data-loading-text="登录中...")= locale.signinPage.login_button
 

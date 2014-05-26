@@ -1,0 +1,18 @@
+li{
+    position:absolute;
+    margin-left:0px;
+    height:43px;
+}
+li.active{
+    border-bottom:none;
+}
+
+.tab-content{
+  min-height:600px;
+
+}
+#chart-content,
+#table-content{
+  min-height:600px;
+  /*min-height:90%;*/
+}

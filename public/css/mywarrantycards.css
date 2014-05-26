@@ -45,11 +45,11 @@
 .card-body .view-details{
   position:relative;
   /*left:25%;*/
-  top:50px;
+  top:10px;
 }
 
-.card-detail .note-text {
-  margin-top: 20px;
+.note-text {
+  /*margin-top: 20px;*/
   margin-left: 20px;
   word-wrap: break-word;
 }

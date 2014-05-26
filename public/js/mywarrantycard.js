@@ -3,13 +3,15 @@ $(document).on('ready',function(){
   // $(".row.card-detail").removeStyle()
 
   $("button.view-details").on('click',function(){
-    console.log("clicked view detail");
-    var element = $(this).closest(".card").find(".card-detail");
-    if(element.is(':visible') ){
-      element.slideUp("slow");
-    }else{
-      element.slideDown("slow");
-    }
+    // console.log("clicked view detail");
+    // var element = $(this).closest(".card").find(".card-detail");
+    // if(element.is(':visible') ){
+    //   element.slideUp("slow");
+    // }else{
+    //   element.slideDown("slow");
+    // }
+    var warrantynumber = $(this).closest(".card").find(".card-number").text().split(':')[1];
+    location.href = location.href+'/'+warrantynumber;
   })
 
   $("button.post-message").on('click',function(event){

@@ -22,13 +22,8 @@ mixin makeCard(card,hidden)
   //- - var card = $.parseJSON(card)
   .card(class='#{hidden}')
     .row.card-general
-      //- .lightbox.hide-big-pic.fade(id="#{card.number?card.number:''}"+'-big-pic',role='dialog',aria-hidden='true',tabindex="-1")
-      //-   .lightbox-content
-      //-     img(src="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
-
+    
       a.col-md-3.thumbnail.appliance-pic-magnific(href="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
-        //(data-toggle='lightbox',href="#"+"#{card.number?card.number:''}"+'-big-pic')
-        //-(href="#{card?card.appliance?card.appliance.detailPath:null:null}")
         img.appliance-pic(src="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
       .card-body.col-md-9
         h4.card-number= locale.myCardsPage.card_number+":"+(card.number?card.number:"")
@@ -36,44 +31,43 @@ mixin makeCard(card,hidden)
        
         h1.warranty-status
           span.warranty-status-text= (card.status?locale.myCardsPage.valid_status:locale.myCardsPage.invalid_status)
+        h4.note
+          span.label.label-default.note-label= locale.myCardsPage.note
+          span.note-text= card.card?card.card.note?card.card.note:locale.myCardsPage.no_note:locale.myCardsPage.no_note
         .card-opeartions
-          //- button.view-details.btn.btn-success= locale.myCardsPage.button_apply_for_service+" "
-          //-   badge.glyphicon.glyphicon-arrow-down
-          button.view-details.btn.btn-default= locale.myCardsPage.button_viewDetail+" "
-            badge.glyphicon.glyphicon-chevron-down
-    .row.card-detail
+          button.view-details.btn.btn-default.pull-right= locale.myCardsPage.button_viewDetail+" "
+            badge.glyphicon.glyphicon-chevron-right
+        .detail.col-md-10
+          span #{locale.myCardsPage.warranty_date}
+          span.date.date-from= (card.fromDate?card.fromDate.toLocaleDateString():"") + " ~ "
+          span.date.date-to= card.toDate?card.toDate.toLocaleDateString():""
+    //- .row.card-detail
       //- a.btn.btn-default.col-md-offset-3#instruction(href="#{card?card.appliance?card.appliance.detailPath:null:null}")= locale.myCardsPage.user_instruction
-      h4.note.col-md-2
-        .label.label-default.note-label= locale.myCardsPage.note
-        .row.note-text= card.card?card.card.note?card.card.note:locale.myCardsPage.no_note:locale.myCardsPage.no_note
-      .detail.col-md-10
-        span #{locale.myCardsPage.warranty_date}
-        span.date.date-from= (card.fromDate?card.fromDate.toLocaleDateString():"") + " ~ "
-        span.date.date-to= card.toDate?card.toDate.toLocaleDateString():""
-        .messageList
-        -var messages = card?card.card.message:[]
-        if messages.length == 0
-          h4= locale.myCardsPage.no_message
-        else
-          h4= locale.myCardsPage.messages
-          each message in messages
-            //- li= message.userName
-            -console.log(message);
-            if(message)
-              +messageList(message)
-        form.new-message.row
-          textarea.col-md-9.col-md-offset-1(name='message')
-          button.post-message.btn.btn-default.col-md-1.col-md-offset-1= locale.myCardsPage.button_postmessage
+     
+//-         .messageList
+//-         -var messages = card?card.card.message:[]
+//-         if messages.length == 0
+//-           h4= locale.myCardsPage.no_message
+//-         else
+//-           h4= locale.myCardsPage.messages
+//-           each message in messages
+//-             //- li= message.userName
+//-             -console.log(message);
+//-             if(message)
+//-               +messageList(message)
+//-         form.new-message.row
+//-           textarea.col-md-9.col-md-offset-1(name='message')
+//-           button.post-message.btn.btn-default.col-md-1.col-md-offset-1= locale.myCardsPage.button_postmessage
 
 
 
-mixin messageList(message)
-  if(message.postDate && message.userName && message.message)
-    .message-content
-      h4.poster-name= message.userName + ":"
-      h5
-        span.post-date.pull-right= message.postDate?message.postDate.toLocaleDateString():"no-date"
-      p.message= message.message
+//- mixin messageList(message)
+//-   if(message.postDate && message.userName && message.message)
+//-     .message-content
+//-       h4.poster-name= message.userName + ":"
+//-       h5
+//-         span.post-date.pull-right= message.postDate?message.postDate.toLocaleDateString():"no-date"
+//-       p.message= message.message
 
 
 

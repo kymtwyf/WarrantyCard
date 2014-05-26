@@ -51,11 +51,42 @@ $(document).on('submit','.form-register',function(event){
       alert(data.detail);
     }else{
       console.log(JSON.stringify(data));
-      console.log('success login');
+      console.log('success register');
       if(data.redirect){
         window.location.href = data.redirect
       }
     }
   }
   )
+})
+
+$(document).on('ready',function(){
+
+
+  $("button#signin-submit").click(function(e){
+      e.preventDefault();
+      var email = $('input[name="email"]').val();
+      var password = $('input[name="password"]').val();
+      var signinurl = '/api/signin';
+      console.log('email'+email);
+      // console.log('password'+password);
+
+      console.log('clicked');
+      $.post(signinurl,{
+        email:email,
+        password:password
+      },function(data){
+        // console.log(JSONdata);
+        data = JSON.parse(data);
+        if(data.status =='success'){
+          location.href = '/';
+        }else{
+          $('#message-box>.alert').trigger('showMessage',["邮箱或者密码错误，请重试！","alert-danger",2000]);
+        }
+      })
+      var btn = $(this).button('loading');
+      setTimeout(function () {
+          btn.button('reset');
+      }, 1000);
+  }); 
 })

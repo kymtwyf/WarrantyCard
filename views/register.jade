@@ -1,10 +1,10 @@
 extends layout
 block scripts
-  script(type='text/javascript',src='/js/register.js')
+  script(type='text/javascript',src='/js/register-login.js')
   link(rel='stylesheet', href='/css/register-login.css')
 block content
   .container.wrapper
-    form.form-register.form-horizontal(action='/api/register')
+    form.form-register.form-horizontal
       h2.form-register-heading.text-center
         |#{locale.registerPage.register_title} 
       .form-group
@@ -31,5 +31,5 @@ block content
       //- label.checkbox
       //-   input(name='remember',type='checkbox', value='remember-me')
       //-   | Remember me
-      button#register-submit.btn.btn-lg.btn-primary.btn-block(type='submit')= locale.registerPage.button_register
+      button#register-submit.btn.btn-lg.btn-primary.btn-block(data-loading-text="登录中...",type='submit')= locale.registerPage.button_register
 

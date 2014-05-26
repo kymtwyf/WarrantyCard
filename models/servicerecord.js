@@ -7,6 +7,7 @@ var schema = new database.Schema({
   message:[],
   isopen:{type:Boolean,default:true},
   rating:{ type: Number, min: 0, max: 5},
+  openTime:{type:Date,default:Date.now},
   closeTime:Date,
   closer:database.ObjectId,
   closeReason:String

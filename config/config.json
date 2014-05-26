@@ -1,17 +1,125 @@
 {
   "en":{
     "tag":"en",
-    "app_name":"Online Warranty",
-    "titles":{
-      "register_title":"Register"      
+    "app_name":"Warranty Online",
+    "registerPage":{
+      "register_title":"Register",
+      "name_placeholder":"Your Name",      
+      "email_placeholder":"*Your Email",
+      "password_placeholder":"*Password",
+      "rpt_pwd_placeholder":"*Repeat Password",
+      "phone_placeholder":"Telephone",
+      "address_placeholder":"Address",
+      "button_register":"Register Now!",
+      "warning_message":"There are some error, please try again after verification"
+
+    },
+    "signinPage":{
+      "signin_title":"Sign In",
+      "email_placeholder":"Your email",
+      "password_placeholder":"Password",
+      "login_button":"Signin"
     },
     "tags":{
       "Header_Home":"Home",
       "Header_About":"About",
       "Header_MyWarrantyCards":"My Warranty Cards",
       "Header_MyAppliances":"My Appliances",
-      "Header_MyProfile":"My Probile",
-      "Header_logout":"log out"
+      "Header_MyProfile":"My Profile",
+      "Header_logout":"Sign out",
+      "Header_username":"User name",
+      "Header_placeholder_username":"Type your your name",
+      "Header_username":"Password",
+      "Header_placeholder_password":"Provide your password",
+      "Header_Signin":"Signin",
+      "Header_Register":"Register Now!",
+      "Header_Salesman_WarrantyCards":"Manage Cards",
+      "Header_Salesman_Appliances":"Manage Appliances",
+      "Header_Statistic":"Statistics"
+
+
+    },
+    "myCardsPage":{
+      "button_viewDetail":"View Details",
+      "card_number":"Card Number",
+      "appliance_name":"Appliance Name",
+      "warranty_date":"Warranty Date: ",
+      "status":"Status",
+      "valid_status":"in Service",
+      "invalid_status":"out of Service",
+      "user_instruction":"View Instructions",
+      "button_apply_for_service":"Apply for Service ",
+      "text_applied":"Already applied",
+      "note":"note",
+      "no_note":"Empty",
+      "no_message":"no messages",
+      "messages":"all messages",
+      "button_postmessage":"send"
+    },
+    "manageCards":{
+      "message_title":"all messages",
+      "no_message":"no message",
+      "create_card":"register a new card",
+      "user_email":"Customer email*",
+      "SN":"SN*",
+      "KY":"KY",
+      "note":"note",
+      "invoice":"upload invoice picture*",
+      "titel_invoice_preview":"invoice preview",
+      "click_to_upload":"click to upload",
+      "submit":"submit",
+      "click_to_register":", click to register",
+      "success":"success",
+      "fail":"fail",
+      "search_dropdown_card":"warranty cards",
+      "search_dropdown_appliance":"appliances ",
+      "search_dropdown_customer":"customers"
+
+
+
+    },
+    "viewCard":{
+      "page_title":"View Warranty Cards",
+      "card_number":"Card Number:",
+      "warranty_date":"Warranty Date：",
+      "valid_status":"in service ",
+      "invalid_status":"out of service ",
+      "appliance_name":"appliance name",
+      "invoice_click_to_zoom":"Invoice, click to zoom",
+      "SN":"SN",
+      "KY":"KY",
+      "warranty_title":"Warranty Card Detail",
+      "appliance_title":"Appliance Info",
+      "records_title":"Service Records",
+      "apply_for_service":"Apply",
+      "pay_for_service":"Apply for paied service",
+      "isopen":"Service pending",
+      "isclosed":"Service closed",
+      "click_to_view_instructions":"click to view instructions",
+      "modaltitle_apply_for_service":"Apply for service",
+      "btn_cancel":"Cancel",
+      "btn_submit":"Submit",
+      "service_type_title":"Service Type",
+      "service_type_consult":"Consult",
+      "service_type_repair":"Repair",
+      "service_type_return":"Return",
+      "service_message_title":"Message"
+
+
+
+    },
+    "personalInfo":{
+      "title":"Personal Info",
+      "name_label":"Name：",
+      "email_label":"Email：",
+      "telephone_label":"Telephone：",
+      "address_label":"Address：",
+      "goto_gravatar":"Visit gravatar.com to change picture",
+      "btn_edit":"Edit",
+      "btn_save":"Save",
+      "btn_cancel":"Cancel Edit",
+      "no_value":"Empty"
+
     }
   },
   "cn":{
@@ -135,6 +243,13 @@
       "btn_cancel":"取消修改",
       "no_value":"空"
 
+    },
+    "statistics":{
+      "title":"统计信息",
+      "countType_salesnumber":"销售量",
+      "countType_salesmoney":"销售额",
+      "countType_servicenumber":"服务请求数量",
+      "btn_count":"统计"
     }
   }
 }

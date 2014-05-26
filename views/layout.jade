@@ -4,10 +4,10 @@ html
 
   body
   -var user = session?session.user?session.user:null:null
-  #header
+  header#header
     .language.hidden= locale.tag
-    .navbar-wrapper
-      .container
+    .navbar
+      .nav(role='navigation').container
         .navbar-header
           button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-collapse')
             span.sr-only Toggle Navgation
@@ -16,7 +16,7 @@ html
             span.icon-bar
           a.navbar-brand= locale.app_name
         #navbar-collapse.navbar-collapse.collapse
-            ul.nav.nav-pills
+            ul.nav.navbar-nav
               li            
                 a(href='/')= locale.tags.Header_Home
                   span.glyphicon.glyphicon-home
@@ -56,19 +56,19 @@ html
                     button.btn.btn-success.form-control(type='submit',style='margin-left:20px')= locale.tags.Header_Signin
 
 
-              //- if currentUrl != '/regisdter'
-              //-   form#header_signin_form.navbar-form.navbar-right(action='/api/login',method='post')
-              //-     input.text(type='hidden',name='redirect',value='/')
-              //-     .form-group
-              //-       input.form-control(name='user',placeholder="#{locale.tags.Header_placeholder_username}")
-              //-     .form-group
-              //-       input.form-control(name='password',type='password',placeholder="#{locale.tags.Header_placeholder_password}")
-              //-     button.btn.btn-success(type='submit')= locale.tags.Header_Signin
-                //- a.btn-primary(href='/register')= locale.tags.Header_Register
+                //- if currentUrl != '/regisdter'
+                //-   form#header_signin_form.navbar-form.navbar-right(action='/api/login',method='post')
+                //-     input.text(type='hidden',name='redirect',value='/')
+                //-     .form-group
+                //-       input.form-control(name='user',placeholder="#{locale.tags.Header_placeholder_username}")
+                //-     .form-group
+                //-       input.form-control(name='password',type='password',placeholder="#{locale.tags.Header_placeholder_password}")
+                //-     button.btn.btn-success(type='submit')= locale.tags.Header_Signin
+                  //- a.btn-primary(href='/register')= locale.tags.Header_Register
 
-
-  #message-box.row.center.text-center
-    .alert.hidden
-       button(type="button",class="close",data-dismiss="alert",aria-hidden="true")&times;
-  block content 
+  .container
+    #message-box.row.center.text-center
+      .alert.hidden
+         button(type="button",class="close",data-dismiss="alert",aria-hidden="true")&times;
+    block content 
 include include/footer
