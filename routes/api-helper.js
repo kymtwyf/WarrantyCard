@@ -21,6 +21,6 @@ exports.handleError = function(req,res,err){
       status:'error',
       detail:util.inspect(err)
     }
-    res.send(JSON.stringify(errorMessage));
+    res.send(errorMessage);
   // }
 }

@@ -58,7 +58,7 @@ schema.methods.setRating = function(number){
   if(number < 0 || number > 5){
     ret.reject("error raiting number "+number);
   }else{
-    this.raiting = number;
+    this.rating = number;
     this.save(function(err,record){
       ret.resolve(saveCallBack(err,record));
     });

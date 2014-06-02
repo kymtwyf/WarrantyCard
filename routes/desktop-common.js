@@ -46,6 +46,9 @@ exports.viewcard = function(req,res){
     if(err){
       records.reject();
     }else{
+      results = _.sortBy(results,function(item){
+        return -item.openTime;
+      })
       records.resolve(results);
     }
   })

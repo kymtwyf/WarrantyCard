@@ -1,6 +1,7 @@
 var ServiceRecord = require('../models/servicerecord');
+var WarrantyCard = require('../models/warrantycard');
 var ERROR_HELPER = require('./api-helper').handleError;
-
+var _ = require('underscore');
 exports.create = function(req,res){
   var warrantyId = req.body.warrantyId;
   var openReason = req.body.openReason;
@@ -12,26 +13,34 @@ exports.create = function(req,res){
   }
   console.log('[ServiceRecord create]the warrantyId is '+warrantyId) ;
 
-  new ServiceRecord({
-    warrantyId:warrantyId,
-    openReason:openReason
-  }).save(function(err,result){
+  WarrantyCard.findById(warrantyId,function(err,card){
     if(err){
       ERROR_HELPER(req,res,err);
     }else{
-      result.insertMessage(user,message)
-      .then(function(record){        
-        res.send({
-          status:'success',
-          record:record
-        })
+      card.setStatus('PENDING');
+      new ServiceRecord({
+        warrantyId:warrantyId,
+        openReason:openReason
+      }).save(function(err,result){
+        if(err){
+          ERROR_HELPER(req,res,err);
+        }else{
+          result.insertMessage(user,message)
+          .then(function(record){        
+            res.send({
+              status:'success',
+              record:record
+            })
+          })
+          // res.send({
+          //       status:'success',
+          //       record:result
+          //     })
+        }
       })
-      // res.send({
-      //       status:'success',
-      //       record:result
-      //     })
     }
   })
+  
 
 
 }
@@ -47,6 +56,9 @@ exports.search = function(req,res){
     if(err){
       ERROR_HELPER(req,res,err);
     }else{
+      record = _.sortBy(record,function(item){
+        return -item.openTime;
+      })
       res.send({
         status:'success',
         record:record
@@ -69,6 +81,9 @@ exports.insertMessage = function(req,res){
       }else{
         if(record){
           record.insertMessage(user,message).then(function(message){
+            _.each(record.message,function(item){
+              item.time = item._id.getTimestamp()
+            })
             res.send({
               status:"success",
               record:record
@@ -96,11 +111,48 @@ exports.closeRecord = function(req,res){
       }else{
         record.setRating(rating).then(function(record){
           record.closeRecord(reason).then(function(record){
-            res.send({
-              status:'success',
-              record:record
+            ServiceRecord.find({warrantyId:record.warrantyId,isopen:true},function(err,results){
+              if(!results || _.isEmpty(results)){
+                WarrantyCard.findById(record.warrantyId,function(err,card){
+                  card.setStatus('ACTIVE').then(function(){
+                    res.send({
+                      status:'success',
+                      record:record
+                    })
+                  });
+
+                })
+              }else{
+                 res.send({
+                  status:'success',
+                  record:record
+                })
+              }
             })
+           
           })
+        })
+      }
+    })
+  }
+}
+
+exports.getMessageList = function(req,res){
+  var recordId = req.body.recordId;
+  if(!recordId){
+    ERROR_HELPER(req,res,"invalid recordId")
+  }else{
+    ServiceRecord.findById(recordId,function(err,record){
+      if(err||!record){
+        ERROR_HELPER(req,res,err)
+      }else{
+        // var messageWithTime = []
+        _.each(record.message,function(item){
+          item.time = item._id.getTimestamp();
+        })
+        res.send({
+          status:'success',
+          messages:record.message
         })
       }
     })

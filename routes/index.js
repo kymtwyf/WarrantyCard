@@ -14,13 +14,13 @@ function preset(req,res,next){
 
 function filter(req,res,next){
   // console.log(req);
-  console.log('filtering');
-  console.log(req.session.user);
+  // console.log('filtering');
+  // console.log(req.session.user);
   if(!req.session.user){
     res.redirect('/login');
   }else if (req.session.user.role == 'salesman'){
     var valid = false;
-    console.log("||| is salesman");
+    // console.log("||| is salesman");
     if(req.route.path.indexOf('/managecards')!= -1){
       invalid = true;
     }
@@ -52,6 +52,7 @@ module.exports = function(app){
   app.post('/api/servicerecord/search',api.ServiceRecord.search);
   app.post('/api/servicerecord/insertMessage',api.ServiceRecord.insertMessage);
   app.post('/api/servicerecord/closeRecord',api.ServiceRecord.closeRecord);
+  app.post('/api/servicerecord/getMessageList',api.ServiceRecord.getMessageList);
 
   app.post('/api/salesrecord/create',api.SalesRecord.create);
   app.post('/api/salesrecord/search',api.SalesRecord.search);

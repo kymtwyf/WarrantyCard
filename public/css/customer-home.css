@@ -1,0 +1,12 @@
+#index-feature{
+  padding-top: 50px;
+}
+#index-feature ul li{
+  float:left;
+  width:25%;
+  text-align: center;
+  padding: 45px 0;
+  font-size: 14px;
+  color: #999;
+  list-style-type: none;
+}

@@ -1,4 +1,6 @@
 extends layout
+block scripts
+  link(rel='stylesheet',href='/css/customer-home.css')
 
 block content
   .container.wrapper
@@ -18,3 +20,34 @@ block content
         span.glyphicon.glyphicon-chevron-left
       .right.carousel-control(href='#carousel',data-slide='next')
         span.glyphicon.glyphicon-chevron-right
+    #index-feature
+      h3.index-title.text-center 提升售后管理质量
+      ul.index-body
+        li
+          img(src='/images/i1.png')
+          h4
+            | 一站服务
+          p(style='white-space:pre;')
+            | 提供一站式售后服务平台 
+            | 快速查找所需内容 
+        li
+          img(src='/images/i2.png')
+          h4
+           | 畅通交流
+          p(style='white-space:pre;')
+            | 方便交流
+            | 迅速反馈
+        li
+          img(src='/images/i3.png')
+          h4
+            | 统一管理
+          p(style='white-space:pre;')
+            | 统一的管理平台
+            | 帮助提升管理效率
+        li
+          img(src='/images/i4.png')
+          h4
+            | 分析统计
+          p(style='white-space:pre;')
+            | 样式的分析方式
+            | 快速掌握售后动态 

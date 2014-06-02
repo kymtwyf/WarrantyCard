@@ -13,16 +13,19 @@ block content
       if user.role=='customer'  
         if card.status == 'ACTIVE'
           span.btn.btn-default.apply-for-service.pull-right= locale.viewCard.apply_for_service
-        else 
-          span.btn.btn-default.pay-for-service.pull-right= local.viewCard.pay_for_service
+        else if card.status =='PENDING'
+          span.btn.btn-success.pull-right(disabled) 服务发起中
+        else
+          span.btn.btn-default.pay-for-service.pull-right= locale.viewCard.pay_for_service
       h4.warranty-number= locale.viewCard.card_number+card._id
       span #{locale.viewCard.warranty_date}
       span.date.date-from= (card.createTime?card.createTime.toLocaleDateString():"") + " ~ "
       span.date.date-to= card.expireTime?card.expireTime.toLocaleDateString():""
-      if card.status=='ACTIVE'
-        .warranty-status= locale.viewCard.valid_status
-      else 
-        .warranty-status= locale.viewCard.invalid_status
+      .warranty-status-title 保修状态：
+        if card.status=='INACTIVE'
+          span.warranty-status= locale.viewCard.invalid_status
+        else 
+          span.warranty-status= locale.viewCard.valid_status
 
     .appliance-detail.row
       .appliance-detail-title= locale.viewCard.appliance_title
@@ -31,8 +34,10 @@ block content
         a.thumbnail.appliance-pic.center(href='#{appliance.detailPath}',target='_blank')
           img(src='#{appliance.picPath}',title='#{locale.viewCard.click_to_view_instructions}')
       .col-md-offset-1.col-md-3.appliance-description
-        .SN= locale.viewCard.SN+ appliance.SN
-        .KY= locale.viewCard.KY+ appliance.KY
+        .SN= "设备序列号："+ appliance.SN
+        <br/>
+        .KY= "设备型号："+ appliance.KY
+        <br/>
         a.btn.btn-default.detail(href='#{appliance.detailPath}')= locale.viewCard.click_to_view_instructions
       .invoice-head.pull-right
         h5.invoice-info.text-center= locale.viewCard.invoice_click_to_zoom
@@ -44,14 +49,14 @@ block content
       //- h4.records-title
       each record in records
         +makeRecord(record)
-      //- |#{records[0].message[0].user.userName}
-      //- |records
-      //- |card
+    
+
+   
     .modal.fade#createRecordModal(role='dialog',aria-labelledby="dialog-title",aria-hidden='true')
       .modal-dialog
         .modal-content
           .modal-header
-            button.close(type='button',data-dismiss='modal',aria-hidden='true')&times;
+            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
             h4.modal-title#dialog-title= locale.viewCard.modaltitle_apply_for_service
           .modal-body            
             h5.warranty-number-text= locale.viewCard.card_number
@@ -68,18 +73,88 @@ block content
           .modal-footer
             a.btn.btn-default(data-dismiss='modal')= locale.viewCard.btn_cancel
             a.btn.btn-primary#btn-submit-service= locale.viewCard.btn_submit
+
+    .modal.fade#closeRecordModal(rold='dialog',aria-labelledby="dialog-title1",aria-hidden='true')
+      .modal-dialog
+        .modal-content  
+          .modal-header
+            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+            h4.modal-title#dialog-title1 关闭服务
+          form.modal-body
+            .form-group 
+              label.control-label 服务号：
+              labe.control-label#record-id
+            .form-group.control-group
+              label.control-label 服务评价（1-5从最坏到最好） 
+              select#rating.form-control
+                option(value='5') 5星
+                option(value='4') 4星
+                option(value='3') 3星
+                option(value='2') 2星
+                option(value='1') 1星
+            .form-group
+              label.control-label 关闭服务原因（如完成服务）
+              input.form-control#reason-for-close(type='textarea',rows=3)
+            .form-group
+              a.btn.btn-default(data-dismiss='modal') 取消
+              a.btn.btn-primary#btn-close-service-submit= locale.viewCard.btn_submit
+             
+
+
+
+  #message-template.message-item.col-md-offset-1.col-md-10
+    .name-time
+      span.small.time.pull-right DEF
+      span.small.time-label.pull-right 回复时间：
+      span.name-label 用户：
+        a.name ABC
+    h5.message-body Hallo
+
 mixin makeRecord(record)
   .record
     .record-status
       if record.isopen
-        .record-open= locale.viewCard.isopen
+        span.small.pull-right= record.openTime.toLocaleDateString()
+        span.small.pull-right 服务发起时间：
+        h5
+          a.record-id-tag #{'  '} 服务号：  #{'  '}
+          a.record-id= record._id
+        h5.record-open(style='color:green')= locale.viewCard.isopen
+
       else
-        .record-close= locale.viewCard.isclosed
-        .record-rating= record.rating
-    each message in record.message  
-      h4.name= message.user.userName?message.user.userName:message.user.name+":"
-      span.message-time.pull-right= message._id.getTimestamp().toLocaleDateString()
-      .message.col-md-offset-1= message.message.message
+        span.small.pull-right= record.openTime.toLocaleDateString()
+        span.small.pull-right 服务发起时间：
+        h6
+          a.record-id-tag 服务号  #{'   '}
+          a.record-id= record._id
+        h5.record-close= locale.viewCard.isclosed
+        span.small.pull-right= record.closeTime.toLocaleDateString()
+        span.small.pull-right 服务关闭时间：
+    .record-details
+      if record.isopen && user.role == 'customer'
+        .record-operations
+          .btn-close-service.btn.btn-primary.btn-sm.pull-right 关闭服务
+      else 
+        .record-close-detail
+          .rating
+            span.record-rating-title 服务评价：
+            span.record-rating= record.rating
+          .closed-reason-operator
+            .closed-reason
+
+      .record-messages.row
+      .reply.row
+        form.center
+          label.control-label(for='message') 输入回复内容：
+          input.form-control(name='text',type='textarea',rows='2')
+          span.btn-reply.btn.btn-default.btn-sm.pull-right 回复
+
+      //- .message-title 留言
+
+    //- each message in record.message  
+    //-   h4.name= message.user.userName?message.user.userName:message.user.name+":"
+    //-   span.message-time.pull-right= message._id.getTimestamp().toLocaleDateString()
+    //-   .message.col-md-offset-1= message.message
 
 
 

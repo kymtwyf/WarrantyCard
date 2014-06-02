@@ -7,7 +7,7 @@ block content
   .container.wrapper
     #cards
       each card in cards
-        if(card.status == 'ACTIVE')
+        if(card.status != 'INACTIVE' && card.status != 'DELETED')
           .active-card(id='#{card.number}')
             +makeCard(card,"show")            
         else
