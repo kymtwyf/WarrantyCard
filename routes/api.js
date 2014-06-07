@@ -4,6 +4,7 @@ exports.Appliance = require('./api-appliance');
 exports.ServiceRecord = require('./api-servicerecord');
 exports.SalesRecord = require('./api-salesrecord');
 exports.Statistics = require('./api-statistics');
+exports.Search = require('./api-search');
 var config = require('../config/config.json');
 exports.test = function(req,res){
   console.log(JSON.stringify(config));

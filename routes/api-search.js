@@ -9,6 +9,7 @@ var ERROR_HELPER = require('./api-helper').handleError;
 
 
 exports.search = function(req,res){
-  var content = req.body.content;
+  var keyword = req.body.keyword;
+  
   
 }

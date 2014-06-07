@@ -161,7 +161,7 @@
             closeRecordModal.modal('hide');
             location.reload();
           }else{
-            console.lo
+            console.log(data);
           }
         })
       })

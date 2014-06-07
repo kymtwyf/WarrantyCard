@@ -3,9 +3,9 @@ block scripts
   script(type='text/javascript',src='/js/register-login.js')
   link(rel='stylesheet', href='/css/register-login.css')
 block content
-  .container.wrapper
+  .wrapper
     form.form-register.form-horizontal
-      h2.form-register-heading.text-center
+      h3.form-register-heading.text-center
         |#{locale.registerPage.register_title} 
       .form-group
         label.control-label(for='email')= locale.registerPage.email_placeholder

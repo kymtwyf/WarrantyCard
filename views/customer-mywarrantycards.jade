@@ -4,7 +4,7 @@ block scripts
   script(type='text/javascript',src='/js/mywarrantycard.js')
 block content
   #userName.hidden= user?user.name:null
-  .container.wrapper
+  .wrapper
     #cards
       each card in cards
         if(card.status != 'INACTIVE' && card.status != 'DELETED')

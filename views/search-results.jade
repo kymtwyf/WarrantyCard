@@ -1,0 +1,89 @@
+extends layout
+block scripts
+  script(type='text/javascript',src='/js/search-results.js')
+  link(rel='stylesheet',href='/css/search-results.css')
+
+block content
+  .wrapper
+    #search.pull-right(style='width:40%;')
+      .input-group
+        -var val = field?field:'warrantycard'
+        -var btn_text = (function(){if(field=='warrantycard') return '保修卡';else if(field=='appliance') return '设备'; else if(field=='customer') return "顾客";else if(field=='all') return "全部";})()
+        .input-group-btn
+          button.btn.btn-default.dropdown-toggle(data-toggle='dropdown',value='#{val}')= btn_text
+            span.caret
+          ul.dropdown-menu
+            li
+              a(value='warrantycard')= locale.manageCards.search_dropdown_card
+            li
+              a(value='appliance')= locale.manageCards.search_dropdown_appliance
+            li
+              a(value='customer')= locale.manageCards.search_dropdown_customer  
+            li
+              a(value='all')= "全部"                    
+        input.form-control(type='text',placeholder='关键字',value='#{keyword?keyword:""}')
+        .input-group-btn
+          button.btn.btn-default#search-submit
+            span.glyphicon.glyphicon-search
+    -var total = results.warrantycards.length + results.appliances.length + results.users.length
+    h4 搜索结果
+      span.total= " 共 "+total +" 条"
+    #search-results
+
+      #warrantycard-results
+        each card in results.warrantycards
+          .card
+            .row.card-general    
+              a.col-md-3.thumbnail.appliance-pic-magnific(href="#{card.invoicePic?card.invoicePic:'/images/no-image.jpg'}")
+                img.appliance-pic(src="#{card.invoicePic?card.invoicePic:'/images/no-image.jpg'}")
+              .card-body
+                h4.card-number= "保修卡号："+(card._id?card._id:"")
+                h3.warranty-status
+                  span.warranty-status-text= (card.status?locale.myCardsPage.valid_status:locale.myCardsPage.invalid_status)
+                h4.note
+                  span.label.label-default.note-label= locale.myCardsPage.note
+                  span.note-text= card.note?card.note:"无"
+                .card-opeartions
+                  a.view-details.btn.btn-default.pull-right(href='/warrantycard/'+card._id)= locale.myCardsPage.button_viewDetail+" "
+                    badge.glyphicon.glyphicon-chevron-right
+                .detail.col-md-10
+                  span #{locale.myCardsPage.warranty_date}
+                  span.date.date-from= (card.createTime?card.createTime.toLocaleDateString():"") + " ~ "
+                  span.date.date-to= card.expireTime?card.expireTime.toLocaleDateString():""
+
+      #appliance-results
+        each appliance in results.appliances 
+          .appliance 
+            .row
+              a.col-md-3.thumbnail.appliance-pic-magnific(href="#{appliance.picPath?appliance.picPath:'/images/no-image.jpg'}")
+                img.appliance-pic(src="#{appliance.picPath?appliance.picPath:'/images/no-image.jpg'}")
+              .appliance-body
+                h4.app-name= "产品名："+appliance.name
+                h4.app-SN= "序列号："+appliance.SN
+                h4.app-KY= "型号："+appliance.KY
+              if(appliance.status == 'SOLD')
+                h5.appliance-status 已出售
+                a.view-warranty-info(href='/viewcardforappliance/'+appliance._id) 查看保修信息
+              else
+                h5.appliance-status 未出售
+                a.note-sales 登记销售
+              .card-opeartions
+                a.view-details.btn.btn-default.pull-right(href="#{appliance.detailPath?appliance.detailPath:'#'}")= "查看使用说明 "
+                  badge.glyphicon.glyphicon-chevron-right
+
+      #user-results
+        each user in results.users
+          .user
+            .user-name= "姓名："+ user.name
+            .user-email= "电子邮箱："+user.email
+            h6.user-id= "编号："+user._id
+            a.view-details.thumbnail
+              img(src='#{"http://gravatar.com/avatar/"+md5(user.email)+"?s=200"}')
+
+              
+      //- #suggest
+      //-   | 没搜索到想要的内容？你是否需要搜索
+        //- span
+          //- a(href='search?keyword='+keyword+'&field='+'')
+
+

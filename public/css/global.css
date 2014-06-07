@@ -42,13 +42,13 @@ font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Segoe UI', 'Micro
      margin-right: auto;
 }
 
-#page{
-  /*background: #f7f8f6;*/
+/*#page{
+  background: #f7f8f6;
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.2);
   -moz-box-shadow: 0 0 5px rgba(0,0,0,0.2);
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
- /* box-shadow: 0 0 5px rgba(0,0,0,0.3) \9;*/
-}
+  box-shadow: 0 0 5px rgba(0,0,0,0.3) \9;
+}*/
 body>.container{
   min-height:90%;
 }

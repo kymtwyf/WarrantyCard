@@ -1,0 +1,34 @@
+#warrantycard-results .card{
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 1px 6px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 6px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 6px rgba(0,0,0,0.3);
+}
+#warrantycard-results .card a.thumbnail,
+#appliance-results .appliance a.thumbnail
+{
+  width:150px;
+}
+
+#warrantycard-results .card-body{
+  margin-left: 17%;
+}
+.card-general{
+  padding-top:5px;
+  padding-left:50px;
+  padding-right:50px;
+}
+
+
+#user-results .user{
+  margin: 2%;
+  width:20%;
+  float:left;
+}
+/*#user-results{
+  height:auto;
+}*/
+#suggest{
+  display:block;
+}

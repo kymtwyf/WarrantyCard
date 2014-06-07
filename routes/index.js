@@ -91,6 +91,7 @@ module.exports = function(app){
   app.get('/:id/mywarrantycards',preset,filter,desktop.customer.get);
   app.get('/warrantycard/:cardId',preset,filter,desktop.common.viewcard);
   app.get('/:id/mywarrantycards/:cardId',preset,filter,desktop.common.viewcard);
+  app.get('/viewcardforappliance/:appId',preset,filter,desktop.common.viewcardforappliance);
 
   app.get('/:id/myappliances',preset,filter,desktop.customer.myappliances);
   app.get('/:id/myprofile',preset,filter,desktop.customer.myprofile);
@@ -102,6 +103,7 @@ module.exports = function(app){
   app.get('/logout',preset,api.User.logout);
   app.get('/register',preset,desktop.user.register);
   app.get('/filter',preset,filter,desktop.user.register);
+  app.get('/search',preset,filter,desktop.salesman.search);
 
 
   //test

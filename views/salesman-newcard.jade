@@ -6,7 +6,7 @@ block scripts
   link(rel='stylesheet',href='/css/newcard.css')
 
 block content
-  .container.wrapper
+  .wrapper
     h3.form-title.text-center= locale.manageCards.create_card
     form#new-card-form.form-horizontal(enctype='multipart/form-data')
       input.hidden(name='creator',value="#{user?user._id:null}")

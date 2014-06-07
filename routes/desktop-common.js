@@ -85,3 +85,16 @@ exports.viewcard = function(req,res){
   //   currentUrl:req.path
   // })
 }
+
+
+exports.viewcardforappliance = function(req,res){
+  var appId = req.param('appId');
+  console.log('applianceId '+appId);
+  WarrantyCard.findOne({appliance:appId},function(err,card){
+    if(err){
+      res.send(404);
+    }else{
+      res.redirect('/warrantycard/'+card._id)
+    }
+  })
+}

@@ -1,24 +1,54 @@
 extends layout
+block scripts
+  script(type='text/javascript',src='/js/managecards.js')
+  link(rel='stylesheet', href='/css/managecards.css')
+
 
 block content  
-  .container.wrapper
-    #search.container.row
-      .input-group.col-md-4.pull-right
+  .wrapper
+    #search.pull-right(style='width:40%;')
+      .input-group
         .input-group-btn
-          button.btn.btn-default.dropdown-toggle(data-toggle='dropdown')= locale.manageCards.search_dropdown_card
+          button.btn.btn-default.dropdown-toggle(data-toggle='dropdown',value='warrantycard')= locale.manageCards.search_dropdown_card
             span.caret
           ul.dropdown-menu
             li
-              a= locale.manageCards.search_dropdown_card
+              a(value='warrantycard')= locale.manageCards.search_dropdown_card
             li
-              a= locale.manageCards.search_dropdown_appliance
+              a(value='appliance')= locale.manageCards.search_dropdown_appliance
             li
-              a= locale.manageCards.search_dropdown_customer                      
-        input.form-control(type='text',placeholder='Search')
+              a(value='customer')= locale.manageCards.search_dropdown_customer        
+            li
+              a(value='all')= "全部"                 
+        input.form-control(type='text',placeholder='关键字')
         .input-group-btn
-          button.btn.btn-default#searchcard
+          button.btn.btn-default#search-submit
             span.glyphicon.glyphicon-search
-    #messages.container
-      |、
-    #createCard.container
-      a.btn.btn-default(href="/managecards/create")= locale.manageCards.create_card
+    h4 保修卡管理
+  
+    #createCard.text-center
+      a.btn.btn-default.center(href="/managecards/create")
+    <br/>
+    h4.text-center 最近添加的保修卡
+    #recent-cards
+      each card in recent_cards
+        .card
+          .row.card-general    
+            a.col-md-3.thumbnail.appliance-pic-magnific(href="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
+              img.appliance-pic(src="#{card.card?card.card.invoicePic:'/images/no-image.jpg'}")
+            .card-body
+              h4.card-number= "保修卡号："+(card._id?card._id:"")
+              h3.warranty-status
+                span.warranty-status-text= (card.status?locale.myCardsPage.valid_status:locale.myCardsPage.invalid_status)
+              h4.note
+                span.label.label-default.note-label= locale.myCardsPage.note
+                span.note-text= card.note?card.note:"无"
+              .card-opeartions
+                a.view-details.btn.btn-default.pull-right(href='/warrantycard/'+card._id)= locale.myCardsPage.button_viewDetail+" "
+                  badge.glyphicon.glyphicon-chevron-right
+              .detail.col-md-10
+                span #{locale.myCardsPage.warranty_date}
+                span.date.date-from= (card.createTime?card.createTime.toLocaleDateString():"") + " ~ "
+                span.date.date-to= card.expireTime?card.expireTime.toLocaleDateString():""
+        
+

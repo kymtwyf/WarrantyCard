@@ -1,14 +1,14 @@
 extends layout
 block scripts
   link(rel='stylesheet',href='/css/personal-info.css')
-
   link(rel='stylesheet',href='/css/bootstrap-editable.css')
   script(type='text/javascript', src='/js/bootstrap-editable.js')
   script(type='text/javascript', src='/js/personalinfo.js')
+
 block content
-  #page.container.personalinfo.wrapper
+  #page.personalinfo.wrapper
+    h3.title.text-center= locale.personalInfo.title
     form.form-horizontal
-      h3.title.text-center= locale.personalInfo.title
       a.pull-right.person-image.thumbnail(href='http://gravatar.com')
         img(src='#{"http://gravatar.com/avatar/"+md5(user.email)+"?s=200"}',title='#{locale.personalInfo.goto_gravatar}')
       .text-detail.col-md-5.col-md-offset-1
